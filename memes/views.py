@@ -6,8 +6,8 @@ def home(request):
     return render(request, 'memes.html',{
     })
 def upload(request):
-    return render(request, 'memes.html',{
+    return render(request, 'upload.html',{
     })
 def bpicture(request):
-    return render(request, 'memes.html',{
+    return render(request, 'picture.html',{
     })
