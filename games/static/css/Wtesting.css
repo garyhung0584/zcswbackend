@@ -1,6 +1,7 @@
 canvas { 
     border: 1px solid black; 
     position: absolute;
-    top: none;
-    left: none;
+    top: 0px;
+    left: 0px;
+    margin: 20%;
 }
