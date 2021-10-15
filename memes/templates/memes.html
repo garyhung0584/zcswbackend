@@ -3,15 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>名稱</title>
-        <link rel="stylesheet" href="梗圖.css">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/memes.css' %}">
     </head>
     <body>
 
         <div class="menu">
             <p class="menu_left">
-                <a href="#">HOME</a>
-                <a href="#">GAME</a>
-                <a href="#">PAGE</a>
+                <a href="{% url '.' %}">HOME</a>
+                <a href="{% url 'memes' %}">GAME</a>
+                <a href="{% url '' %}">PAGE</a>
             </p>
             <p class="menu_right">
                 <a id="name">Name123456789</a>
