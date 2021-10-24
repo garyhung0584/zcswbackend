@@ -50,7 +50,7 @@
             {% for photo in photos %}
                 <h3>{{ photo.title }}</h3>
                 <p>發表時間:{{ photo.upload_date }}</p>
-                {{ photo.image }}
+                <img src={{ photo.image.url }}>
             {% endfor %}
         </div>
 
