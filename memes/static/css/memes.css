@@ -81,7 +81,7 @@ body{
 .menu_dropdown a{
     display: none;
     width: 120px;
-    height: 30px;
+    height: 25px;
 
     font: small-caps, Arial, Helvetica bold 17px sans-serif;
     color: #ffffff;
@@ -91,13 +91,13 @@ body{
     text-align: center;
     vertical-align: middle;
 }
-.menu_dropdown a:hover{
+.menu_dropdown a:hover {
     display: inline-block;
     background-color: #F5F5F5;
     color: #000000;
     transition-duration: 0.1s;
 }
-.move_dropdown a:active{
+.menu_dropdown a:active{
     animation-name: click_button_2;
     animation-duration: 1s;
 }
