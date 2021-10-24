@@ -48,7 +48,9 @@
 
         <div class="photo">
             {% for photo in photos %}
-            {{ photo.context }}
+                <h3>{{ photo.title }}</h3>
+                <p>發表時間:{{ photo.upload_date|date:'Y-m-d H:i' }}</p>
+                {{ photo.image }}
             {% endfor %}
         </div>
 
