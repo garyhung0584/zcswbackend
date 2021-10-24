@@ -200,6 +200,7 @@ body{
     color: #828284;
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
 }
 .upload_button a:hover{
     background-color: #545454;
