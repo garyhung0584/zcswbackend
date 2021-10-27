@@ -3,7 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='games'),
-]
-urlpatterns = [
-    path('', views.game1 name='games'),
+    path('1', views.game1, name='game1'),
 ]
