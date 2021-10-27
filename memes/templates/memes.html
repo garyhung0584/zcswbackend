@@ -3,22 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>名稱</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/memes.css' %}">
+        <link rel="stylesheet" href="梗圖.css">
     </head>
     <body>
 
         <div class="menu">
             <p class="menu_left">
-                <a href="https://zcswprj.herokuapp.com">HOME</a>
-                <a href="{% url 'games' %}">GAME</a>
+                <a href="#">HOME</a>
+                <a href="#">GAME</a>
                 <a href="#">PAGE</a>
             </p>
             <p class="menu_right">
                 <a id="name">Name123456789</a>
             </p>
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-            <div></div>
+            <div id="profile_pic"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"></div>
             <ul class="menu_dropdown">
                 <li><a href="#">個人資料</a></li>
                 <li><a href="#">blablabla</a></li>
@@ -36,14 +34,31 @@
             </div>
         </div>
 
+        <div class="hashtag">
+            <a id="#" tabindex="1">#壹壹</a>
+            <a id="#" tabindex="2">#貳貳貳貳貳貳貳貳貳貳</a>
+            <a id="#" tabindex="3">#參參參參參參</a>
+            <a id="#" tabindex="4">#肆肆肆肆肆肆肆肆</a>
+            <a id="#" tabindex="5">#伍伍伍伍伍</a>
+            <a id="#" tabindex="6">#陸陸陸陸陸陸陸陸陸陸陸陸</a>
+            <a id="#" tabindex="7">#柒柒柒柒柒柒柒柒柒柒柒柒柒柒</a>
+            <a id="#" tabindex="8">#捌捌捌捌捌捌</a>
+        </div>
+
         <div class="introduce">
             <p>
                 介紹Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates corrupti corporis asperiores tempore ex maiores obcaecati possimus commodi, iusto dignissimos.
+                <br><br>
+                made by ...
             </p>
         </div>
 
         <div class="upload_button">
             <button>我要上傳→→</button>
+        </div>
+
+        <div class="picture">
+            <div><img src=""></div>
         </div>
 
     </body>
