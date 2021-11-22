@@ -5,9 +5,10 @@ from memes.models import Photo
 from memes.forms import UploadModelForm
 
 def home(request):
-    form=UploadModelForm
-    context={'form':form}
-    return render(request, 'memes.html', context)
+    photos = Photo.objects.all()
+    #form=UploadModelForm
+    #context={'form':form}
+    return render(request, 'memes.html', { 'photos' : photos })
 def upload(request):
     return render(request, 'upload.html',{
     })
