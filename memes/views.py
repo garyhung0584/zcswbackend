@@ -9,7 +9,8 @@ def photoUpload(request):
     form=UploadModelForm()
     template= 'upload.html'
     if request.method == "GET":
-        return render(request, template, {'photoUpload':UploadModelForm()})
+        return render(request, template, {'memes':UploadModelForm()})
+
     if request.method == "POST":
         form = UploadModelForm(request.POST, request.FILES)
         if form.is_valid():
