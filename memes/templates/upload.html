@@ -39,12 +39,12 @@
                 <div class="upload_pic">
                     <img src="https://cdn-icons.flaticon.com/png/512/3097/premium/3097412.png?token=exp=1635582735~hmac=d25e6063ddd3adc5d8ccc89a0e8637f5">
                     <label>
-                    <input id="upload_pic" type="file">
+                    <input id="upload_pic" type="image">
                     上傳圖片 {{ form.image }}
                     </label>
                 </div>
                 {% block upload %}
-                <form action="" method="post" class="data" enctype="multipart/form-data">
+                <form action="{% url 'memes:photoUpload' %}" method="post" class="data" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="group">
                         <label for="name" class="label">梗圖名字：</label>
