@@ -7,7 +7,7 @@ from memes.forms import UploadModelForm
 def photoUpload(request):
     photos = Photo.objects.all()
     form=UploadModelForm()
-    template= 'memes/upload.html'
+    template= 'upload.html'
     if request.method == "GET":
         return render(request, template, {'photoUpload':UploadModelForm()})
     if request.method == "POST":
