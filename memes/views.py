@@ -19,6 +19,10 @@ def photoUpload(request):
         'photos':photos,
         'form':form}
     return render(request, 'memes.html', { 'photos' : photos })
+
+def home(request):
+    return render(request, 'memes.html')
+
 def bpicture(request):
     return render(request, 'picture.html',{
     })
