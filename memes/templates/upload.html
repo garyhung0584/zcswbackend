@@ -35,7 +35,8 @@
     <main>
         <div class="upload">
             <div class="upload_box">
-
+            <form action="{% url 'photoUpload' %}" method="post" class="data" enctype="multipart/form-data">
+                    {% csrf_token %}
                 <div class="upload_pic">
                     <img src="https://cdn-icons.flaticon.com/png/512/3097/premium/3097412.png?token=exp=1635582735~hmac=d25e6063ddd3adc5d8ccc89a0e8637f5">
                     <label>
@@ -44,8 +45,7 @@
                     </label>
                 </div>
                 {% block upload %}
-                <form action="{% url 'photoUpload' %}" method="post" class="data" enctype="multipart/form-data">
-                    {% csrf_token %}
+                
                     <div class="group">
                         <label for="name" class="label">梗圖名字：</label>
                         <input id="name" type="text" class="input">
