@@ -18,7 +18,7 @@ def photoUpload(request):
     context={
         'photos':photos,
         'form':form}
-    return render(request, 'memes.html', { 'photos' : photos })
+    return render(request, 'memes.html', context)
 
 def home(request):
     return render(request, 'memes.html')
