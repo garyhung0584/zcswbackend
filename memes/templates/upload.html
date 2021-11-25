@@ -44,7 +44,7 @@
                     </label>
                 </div>
                 {% block upload %}
-                <form action="{% url 'memes:photoUpload' %}" method="post" class="data" enctype="multipart/form-data">
+                <form action="{% url 'Photo:photoUpload' %}" method="post" class="data" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="group">
                         <label for="name" class="label">梗圖名字：</label>
