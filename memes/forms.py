@@ -8,5 +8,5 @@ class UploadModelForm(forms.ModelForm):
         model = Photo
         fields = ('image',)
         widgets = {
-            'image': forms.FileInput(attrs={'class': 'form-control-file'})
+            'image': forms.FileInput(attrs={'id': 'upload_pic'})
         }

@@ -39,9 +39,7 @@
                 <form action="{% url 'photoUpload' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="upload_pic">
-                        
                         <label>
-                        <input  type="file">
                         上傳圖片 {{ form.image }}
                         </label>
                     </div>
