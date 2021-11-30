@@ -46,15 +46,18 @@
                     <div class="data">
                         <div class="group">
                             <label for="name" class="label">梗圖名字：</label>
-                            <input id="name" type="text" class="input">
+                            {% comment %} <input id="name" type="text" class="input"> {% endcomment %}
+                            {{ form.title }}
                         </div>
                         <div class="group">
                             <label for="author" class="label">上傳者：</label>
-                            <input id="author" type="text" class="input" value="name" readonly="readonly">
+                            {% comment %} <input id="author" type="text" class="input" value="name" readonly="readonly"> {% endcomment %}
+
                         </div>
                         <div class="group">
                             <label for="content" class="label">簡介：</label>
-                            <textarea id="content" row="3" class="content"></textarea>
+                            {{ form.description }}
+                            {% comment %} <textarea id="content" row="3" class="content"></textarea> {% endcomment %}
                         </div>
 
                         <p class="add_hashtag_text">加入HashTag</p>
