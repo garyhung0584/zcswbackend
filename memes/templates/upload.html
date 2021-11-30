@@ -39,7 +39,7 @@
                 <form action="{% url 'photoUpload' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="upload_pic">
-                        <img src="https://cdn-icons.flaticon.com/png/512/3097/premium/3097412.png?token=exp=1635582735~hmac=d25e6063ddd3adc5d8ccc89a0e8637f5">
+                        
                         <label>
                         <input id="upload_pic" type="file">
                         上傳圖片 {{ form.image }}
