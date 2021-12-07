@@ -230,9 +230,8 @@ body{
 .photo{
     position: fixed;
     top: 250px;
-    left: 90px;
-    width: 72%;
-    background-color: red;
+    left: 50px;
+    width: 77%;
 }
 
 .photo img{

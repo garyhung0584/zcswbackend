@@ -45,7 +45,7 @@
         {% block content %}
         <div class="photo">
             {% for photo in photos %}
-                <img style="height:150px;" src="{{ photo.image.url }}"/>
+                <img src="{{ photo.image.url }}"/>
             {% endfor %}
         </div>
         {% endblock %}
