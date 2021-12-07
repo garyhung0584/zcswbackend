@@ -227,6 +227,18 @@ body{
     -webkit-text-stroke: 0.5px #ffffff;
 }
 
+.photo{
+    position: fixed;
+    top: 250px;
+    left: 90px;
+    width: 72%;
+    background-color: red;
+}
+
+.photo img{
+    height:150px;
+}
+
 /* 介紹 */
 .introduce{
     position: fixed;
