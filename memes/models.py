@@ -1,17 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Tag(models.Model):
-    tag = models.CharField(max_length=16)
+    name = models.CharField(max_length = 200)
 
     def __str__(self):
-        return self.tag
+        return self.name
 
 class Photo(models.Model):
-    title = models.CharField(max_length=16)
-    tag = models.ManyToManyField(Tag)
-    image = models.ImageField(upload_to='image/', blank=False, null=False)
-    upload_date = models.DateTimeField(auto_now_add=True)
-    description = models.TextField(blank=True, max_length=256)
+    title = models.CharField(max_length=16, null = True)
+    uploader = models.ForeignKey(User, on_delete=models.SET_NULL, null = True)
+    image = models.ImageField(upload_to='memes/', blank = False, null = True)
+    upload_date = models.DateTimeField(auto_now_add = True, null = True)
+    description = models.TextField(blank = True, max_length = 256, null = True)
+    tags = models.ManyToManyField(Tag, blank = True)
+    
 
     def __str__(self):
         return self.title
