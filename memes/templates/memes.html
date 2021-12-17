@@ -48,7 +48,9 @@
         {% block content %}
         <div class="photo">
             {% for photo in photos %}
+                <a href="{% url 'picture' photo.id %}" class="memetitle">
                 <img src="{{ photo.image.url }}"/>
+                </a>
             {% endfor %}
         </div>
         {% endblock %}
@@ -64,7 +66,7 @@
         <div class="upload_button">
             <a href="{% url 'upload' %}">我要上傳→→</a>
         </div>
-        <div class="picture">
+        {% comment %} <div class="picture">
         {% for meme in memes %}
             <div class="list">
                 <a href="{% url 'picture' meme.id %}" class="memetitle">{{ meme.title }}</a>
@@ -73,7 +75,8 @@
                 {{ meme.uploader }}
                 {{ meme.image_description }}
             </div>
-        {% endfor %}
+        {% endfor %} 
+        </div> {% endcomment %}
     </div>
 
     </body>

@@ -27,7 +27,7 @@ def photoUpload(request):
 def home(request):
     photolist = Photo.objects.all()
     return render(request, 'memes.html',{
-        'memes' : photolist
+        'photos' : photolist
     })
 
 def picture(request, pk):
