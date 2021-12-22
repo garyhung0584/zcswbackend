@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from django.contrib import auth
+from django.contrib import auth,messages
+
+from .forms import RegisterForm
 
 def index(request):
     return render(request, 'index.html',{
@@ -13,6 +15,7 @@ def userinfo(request):
     else:
         return HttpResponseRedirect('/accounts/login/')
 
+'''
 def login(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/main/')
@@ -24,3 +27,19 @@ def login(request):
         return HttpResponseRedirect('/main/')
     else:
             return render(request, 'login.html')
+'''
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            messages.success(request, "Registration successful.")
+            return HttpResponseRedirect('/main/')
+        else:
+            messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = RegisterForm()
+    return render(request, 'register.html', {
+        'form' : form,
+    })

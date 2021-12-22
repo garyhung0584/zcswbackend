@@ -172,6 +172,15 @@ a{
 	padding: 90px 55px 50px 55px;
 	background-color: #f0f0f0;
 }
+.message{
+	font-size: 28px;
+	position: absolute;
+	top: 250px;
+}
+
+.message2{
+	font-size: 18px;
+}
 .SignIn_form, .SignUp_form{
 	top: 0;
 	left: 0;
