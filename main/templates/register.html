@@ -26,34 +26,36 @@
                     {% else %}
                     <input id="tab-1" type="radio" name="tab" class="SignIn"><label for="tab-1" class="tab"></label>
                     <input id="tab-2" type="radio" name="tab" class="SignUp" checked><label for="tab-2" class="tab">註冊</label>
-					
-                    <div class="LogIn_form">
-                        <div class="SignUp_form">
-                            <div class="group">
-                                <label for="username" class="label">用戶名稱</label>
-                                <input id="username" type="text" class="input">
-                            </div>
-                            <div class="group">
-                                <label for="email" class="label">E-mail</label>
-                                <input id="email" type="email" class="input">
-                            </div>
-                            <div class="group">
-                                <label for="password" class="label">設定密碼</label>
-                                <input id="password" type="password" class="input" data-type="password">
-                            </div>
-                            <div class="group">
-                                <label for="password" class="label">確認密碼</label>
-                                <input id="password2" type="password" class="input" data-type="password">
-                            </div>
-                            <div class="group">
-                                <input type="submit" class="button" value="註冊帳號">
-                            </div>
-                            <div class="hr"></div>
-                            <div class="below">
-                                <label for="tab-1">想起帳號了嗎？</label>
-                            </div>
-                        </div>
-                    </div>
+					<div class="LogIn_form">
+						<form method="POST" action="">
+						{% csrf_token %}
+							<div class="SignUp_form">
+								<div class="group">
+									<label for="username" class="label">用戶名稱</label>
+									{{ form.username }}
+								</div>
+								<div class="group">
+									<label for="email" class="label">E-mail</label>
+									{{ form.email }}
+								</div>
+								<div class="group">
+									<label for="password" class="label">設定密碼</label>
+									{{ form.password1 }}
+								</div>
+								<div class="group">
+									<label for="password" class="label">確認密碼</label>
+									{{ form.password2 }}
+								</div>
+								<div class="group">
+									<input type="submit" class="button" value="註冊帳號">
+								</div>
+								<div class="hr"></div>
+								<div class="below">
+									<a href="{% url 'login' %}"><label for="tab-1">想起帳號了嗎？</label></a>
+								</div>
+							</div>
+						</form>
+					</div>
                     {% endif %}
 				</div>
             </div>

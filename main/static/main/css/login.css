@@ -225,7 +225,7 @@ a{
 	margin-bottom: 15px;
 }
 
-.LogIn_form .group .input,
+.LogIn_form .group input,
 .LogIn_form .group .button{
 	display: block;
 	border: none;
@@ -254,7 +254,7 @@ a{
 	animation-name: click_button_3;
 	animation-duration: 1s;
 }
-.LogIn_form .group .input{
+.LogIn_form .group input{
 	width: 92%;
 	color: #000000;
 }
