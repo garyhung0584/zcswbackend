@@ -34,9 +34,9 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request,user)
+            auth.login(request,user)
             messages.success(request, "Registration successful.")
-            return HttpResponseRedirect('/main/')
+            return HttpResponseRedirect('/main')
         else:
             messages.error(request, "Unsuccessful registration. Invalid information.")
     form = RegisterForm()
