@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.contrib import auth,messages
 
-from .forms import RegisterForm
+from .forms import RegisterForm, UserEditForm
 
 def index(request):
     return render(request, 'index.html',{
@@ -12,6 +12,20 @@ def index(request):
 def userinfo(request):
     if request.user.is_authenticated:
         return render(request, 'personal_info.html')
+    else:
+        return HttpResponseRedirect('/accounts/login/')
+
+def useredit(request):
+    if request.user.is_authenticated:
+        form = UserEditForm()
+        if request.method == 'POST':
+            form = UserEditForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/main/userinfo/')
+        return render(request, 'useredit.html',{
+            'form' : form
+        })
     else:
         return HttpResponseRedirect('/accounts/login/')
 
