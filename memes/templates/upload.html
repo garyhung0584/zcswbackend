@@ -16,14 +16,18 @@
             <a href="{% url 'memes' %}">PAGE</a>
         </p>
         <p class="menu_right">
-            <a id="name">Name123456789</a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'login'%}?next={{request.path}}" id="name">Login</a>
+            {% else %}
+            <a id="name">{{ user.get_username }}</a>
         </p>
-        <div id="profile_pic"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"></div>
+        <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
         <ul class="menu_dropdown">
-            <li><a href="#">個人資料</a></li>
+            <li><a href="{% url 'userinfo' %}">個人資料</a></li>
             <li><a href="#">blablabla</a></li>
-            <li><a href="#">登出</a></li>
+            <li><a href="{% url 'logout' %}?next={{request.path}}">登出</a></li>
         </ul>
+		{% endif %}
     </div>
     
 <!--
@@ -38,10 +42,11 @@
                 {% block upload %}
                 <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="upload_pic">
+                    <div class="upload_pic" id="upload_pic">
                         <label>
                         上傳圖片 {{ form.image }}
                         </label>
+                        {% comment %} <img id="preview_progressbarTW_img" src="#" /> {% endcomment %}
                     </div>
                     <div class="data">
                         <div class="group">
@@ -61,11 +66,12 @@
                         </div>
 
                         <p class="add_hashtag_text">加入HashTag</p>
-                        <div class="hashtag">    
-                            <label>
-                                <input type="checkbox">
-                                <span>HashtagContent之類的</span>
+                        <div id="hashtag_div">
+                            {% for tags in form.tags %}
+                            <label>    
+                                {{ tags }}<span></span>
                             </label>
+                            {% endfor %}
                         </div>
 
                         <p class="new_hashtag_text">
@@ -73,7 +79,7 @@
                             <button class="new_hashtag_field" value="new_hashtag_field">+</button>
                         </p>
                         <div class="new_hashtag">
-                            <label for="new_hashtag">#{{ form.tags }}</label>
+                            <label for="new_hashtag">#</label>
                             
                             <input id="new_hashtag" type="text" class="input_hashtag">
                         </div>
@@ -88,6 +94,40 @@
             </div>
         </div>
     </main>
+    {% comment %} <script>
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#preview_progressbarTW_img').attr('src', e.target.result);
+        };
+        $('#id_image').change(function() {
+            var file = $('#id_image')[0].files[0];
+            reader.readAsDataURL(file);
+        }) 
+
+        $("#id_image").on('change', function(e){                
+            const file = this.files[0];                                                                            
+            const reader = new FileReader();                    
+            reader.onload = function (e) {                    
+               $("#preview_progressbarTW_img").attr('src', e.target.result);                    
+            };                    
+            reader.readAsDataURL(file);                    
+        });
+    </script> {% endcomment %}
+    <script type="text/javascript">
+        var x=new FileReader;
+        document.forms[0].elements[1].onchange=function(){
+        x.readAsDataURL(this.files[0]);
+        }
+        x.onloadend=function(){
+        var elem = document.createElement("img");
+        elem.setAttribute("src", this.result);
+        elem.setAttribute("id", "subImg");
+        if (document.contains(document.getElementById("subImg"))) {
+            document.getElementById("subImg").remove();
+        }
+        document.getElementById("upload_pic").appendChild(elem);
+        }
+    </script>
     <!--upload-->
     
     <!--

@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.files.storage import FileSystemStorage
-from memes.models import Photo
+from memes.models import Photo, Tag
 from memes.forms import UploadModelForm
-from .models import Photo
+
 
 def photoUpload(request):
     template= 'upload.html'
