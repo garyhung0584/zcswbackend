@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.contrib import auth,messages
 
+from .models import Member
 from .forms import RegisterForm, UserEditForm
 
 def index(request):
@@ -17,12 +18,11 @@ def userinfo(request):
 
 def useredit(request):
     if request.user.is_authenticated:
-        form = UserEditForm()
+        form = UserEditForm(request.POST)
         if request.method == 'POST':
-            form = UserEditForm(request.POST)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/main/userinfo/')
+                return HttpResponseRedirect('/main/userinfo')
         return render(request, 'useredit.html',{
             'form' : form
         })
@@ -49,6 +49,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             auth.login(request,user)
+            
             messages.success(request, "Registration successful.")
             return HttpResponseRedirect('/main')
         else:
