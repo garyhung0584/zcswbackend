@@ -22,11 +22,5 @@ class UserEditForm(forms.ModelForm):
     
     class Meta:
         model = Member
-        fields = ("intro", "profile_pic")
-        
-    def save(self, commit = True):
-        member = super(UserEditForm, self).save(commit = False)
-        member.intro = self.cleaned_data['intro']
-        if commit:
-            member.save()
-        return member
+        fields = '__all__'
+        exclude = ['user', 'imguploaded', 'likes']
