@@ -6,6 +6,7 @@ class Member(models.Model):
     intro = models.CharField(default = 'Intro not entered', max_length = 512, blank = True, null = True)
     imguploaded = models.IntegerField(default = 0, null = True)
     likes = models.IntegerField(default = 0, null = True)
+<<<<<<< HEAD
     profile_pic = models.ImageField(default = "default.png", blank = True, null = True, upload_to="member")
     date_create = models.DateTimeField(auto_now_add = True, null = True)
     '''
@@ -13,3 +14,12 @@ class Member(models.Model):
         if self.user:
             return self.user.username
     '''
+=======
+    profile_pic = models.ImageField(blank = True, null = True, default="profile_pic_default.png")
+    date_create = models.DateTimeField(auto_now_add= True, null = True)
+
+ 
+    def __str__(self):
+        if self.user:
+            return self.user.username
+>>>>>>> 021a895 (希望這樣是對的)

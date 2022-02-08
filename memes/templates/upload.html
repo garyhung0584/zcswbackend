@@ -16,7 +16,11 @@
             <a href="{% url 'games' %}">GAME</a>
         </p>
         <p class="menu_right">
+<<<<<<< HEAD
             <a id="id">{{ user.get_username }}</a>
+=======
+            <a id="name">{{ user.get_username }}</a>
+>>>>>>> 021a895 (希望這樣是對的)
         </p>
         <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
         <ul class="menu_dropdown">
