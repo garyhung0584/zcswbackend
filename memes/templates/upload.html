@@ -16,7 +16,7 @@
             <a href="{% url 'memes' %}">PAGE</a>
         </p>
         <p class="menu_right">
-            <a id="name">Name123456789</a>
+            <a id="name">{{ user.get_username }}</a>
         </p>
         <div id="profile_pic"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"></div>
         <ul class="menu_dropdown">
