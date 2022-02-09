@@ -50,10 +50,11 @@
                 </div>
             </div>
             <div class="meme"></div>
-			<form action="" method="POST">
-			{% csrf_token %}
-			{{form}}
-			<input class="button" type="submit" name="submit">
+            <form action="" method="POST" enctype="multipart/form-data">
+			    {% csrf_token %}
+                {{form.as_p}}
+			<input type="submit" name="submit">
+			</form>
 			</form>
         </main>
     </body>

@@ -17,17 +17,17 @@ def userinfo(request):
         return HttpResponseRedirect('/accounts/login/')
 
 def useredit(request):
-    if request.user.is_authenticated:
-        form = UserEditForm(request.POST)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/main/userinfo')
-        return render(request, 'useredit.html',{
-            'form' : form
-        })
-    else:
-        return HttpResponseRedirect('/accounts/login/')
+    member = request.user.member
+    form = UserEditForm(instance=member)
+
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=member)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/main/userinfo')
+    
+    context = {'form':form}
+    return render(request, 'useredit.html', context)
 
 '''
 def login(request):
