@@ -5,12 +5,13 @@
         {% block title %}<title>Memes</title>{% endblock %}
         {% load static %}
         <link rel="stylesheet" href="{% static 'memes/css/memes.css' %}">
+        <link rel="stylesheet" href="{% static 'memes/css/navbar.css' %}">
     </head>
     <body>
         <div class="menu">
             <p class="menu_left">
                 <a href="{% url 'main' %}">HOME</a>
-                <a href="{% url 'memes'%}">MEME</a>
+                <a href="{% url 'memes' %}">MEME</a>
                 <a href="{% url 'games' %}">GAME</a>
             </p>
             </p>
