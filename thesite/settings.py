@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'memes',
     'games',
     'taggit',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -11,9 +11,9 @@
     <!--menu-->
     <div class="menu">
         <p class="menu_left">
-            <a href="https://foodoreo2.herokuapp.com">HOME</a>
+            <a href="{% url 'main' %}">HOME</a>
+            <a href="{% url 'memes' %}">MEME</a>
             <a href="{% url 'games' %}">GAME</a>
-            <a href="{% url 'memes' %}">PAGE</a>
         </p>
         <p class="menu_right">
             {% if not user.is_authenticated %}
@@ -56,8 +56,8 @@
                         </div>
                         <div class="group">
                             <label for="author" class="label">上傳者：</label>
+                            {{ form.uploader }}
                             {% comment %} <input id="author" type="text" class="input" value="name" readonly="readonly"> {% endcomment %}
-
                         </div>
                         <div class="group">
                             <label for="content" class="label">簡介：</label>
@@ -67,11 +67,14 @@
 
                         <p class="add_hashtag_text">加入HashTag</p>
                         <div id="hashtag_div">
-                            {% for tags in form.tags %}
-                            <label>    
-                                {{ tags }}<span></span>
+                            
+                            <label>
+                                {% for tags in form.tags %}    
+                                {{ tags }}
+                                <span></span>
+                                {% endfor %}
                             </label>
-                            {% endfor %}
+                            
                         </div>
 
                         <p class="new_hashtag_text">
@@ -94,25 +97,7 @@
             </div>
         </div>
     </main>
-    {% comment %} <script>
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#preview_progressbarTW_img').attr('src', e.target.result);
-        };
-        $('#id_image').change(function() {
-            var file = $('#id_image')[0].files[0];
-            reader.readAsDataURL(file);
-        }) 
 
-        $("#id_image").on('change', function(e){                
-            const file = this.files[0];                                                                            
-            const reader = new FileReader();                    
-            reader.onload = function (e) {                    
-               $("#preview_progressbarTW_img").attr('src', e.target.result);                    
-            };                    
-            reader.readAsDataURL(file);                    
-        });
-    </script> {% endcomment %}
     <script type="text/javascript">
         var x=new FileReader;
         document.forms[0].elements[1].onchange=function(){
