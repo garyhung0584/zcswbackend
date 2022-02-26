@@ -8,5 +8,5 @@ class UploadModelForm(forms.ModelForm):
         model = Photo
         fields = ('title', 'description', 'image', 'tags', 'uploader')
         widgets = {
-            'tags': forms.CheckboxSelectMultiple
+            'tags': forms.CheckboxSelectMultiple,
         }

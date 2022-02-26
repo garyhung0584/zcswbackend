@@ -12,7 +12,7 @@ class Tag(models.Model):
 class Photo(models.Model):
     title = models.CharField(max_length=16, null = True)
     # uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null = True)
-    uploader = models.ForeignKey(User, on_delete=models.SET_NULL, null = True)
+    uploader = models.ForeignKey(User, on_delete=models.SET_NULL,blank = True, null = True)
     # uploader = serializers.HiddenField(default=serializers.CurrentUserDefault())
     image = models.ImageField(upload_to='memes/', blank = False, null = True)
     upload_date = models.DateTimeField(auto_now_add = True, null = True)

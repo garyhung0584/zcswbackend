@@ -2,20 +2,21 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.contrib import auth,messages
+from django.contrib.auth.decorators import login_required
 
 from .models import Member
 from .forms import RegisterForm, UserEditForm
 
+
 def index(request):
     return render(request, 'index.html',{
     })
-    
-def userinfo(request):
-    if request.user.is_authenticated:
-        return render(request, 'personal_info.html')
-    else:
-        return HttpResponseRedirect('/accounts/login/')
 
+@login_required(login_url='login')
+def userinfo(request):
+    return render(request, 'personal_info.html')
+        
+@login_required(login_url='login')
 def useredit(request):
     member = request.user.member
     form = UserEditForm(instance=member)

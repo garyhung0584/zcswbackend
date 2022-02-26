@@ -67,6 +67,9 @@
     font-size: 15px;
     color: #ffffff;
 }
+#id{
+	color: white;
+}
 .menu img{
     position: fixed;
     top: 13px;
