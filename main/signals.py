@@ -1,6 +1,5 @@
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from django.contrib.auth.models import Group
 
 from .models import Member
@@ -20,12 +19,3 @@ def member_profile_update(sender, instance, created, **kwargs):
         Member.objects.create(user=instance)
         
 post_save.connect(member_profile, sender=User)
-=======
-from .models import Member
-
-def Member_Profile(sender, instance, created, **kwargs):
-    if created:
-        Member.objects.create(user=instance)
-
-post_save.connect(Member_Profile, sender=User)
->>>>>>> 021a895 (希望這樣是對的)
