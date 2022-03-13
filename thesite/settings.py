@@ -42,18 +42,20 @@ INSTALLED_APPS = [
     
     'main.apps.MainConfig',
     
+    'django_filters',
+    
     #'main',
     'memes',
     'games',
     #'taggit',
     #'rest_framework',
     
-    'django.contrib.sites',
+    #'django.contrib.sites',
     #'oauth_app',
     'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    #'allauth.account',
+    #'allauth.socialaccount',
+    #'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +132,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+'''
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
@@ -148,6 +151,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 2
+'''
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
