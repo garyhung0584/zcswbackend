@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-
 {% load unicorn %}
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>梗圖｜name｜詳細資料</title>
+    <title>梗圖-詳細資料</title>
     <link rel="stylesheet" href="{% static 'memes/css/picture.css' %}">
     <link rel="stylesheet" href="{% static 'memes/css/navbar.css' %}">
     {% unicorn_scripts %}
 </head>
+
 <body>
     <!-- Navbar -->
     <div class="menu">
@@ -32,53 +32,29 @@
         </ul>
 		{% endif %}
     </div>
-    
+    <!-- Navbar -->
 
-    <div class="content">    
+    <div class="content">
         <div class="content_box">
-
-            <div class="title">
-                {{meme.title}}
-                {% if request.user == meme.uploader %}
-                <a href="">[編輯]</a>
-                {% endif %}
+            <div class="name">
+                <h2>{{meme.title}}</h2>
             </div>
-            <!-- 這是梗圖名字 由上傳者自己設定 -->
-
             <div class="picture">
-                <img src="{{meme.image.url}}">
-                <a href="">覺得這個圖片有問題？</a>
+                <img src="{{meme.image.url}}" style = "max-width:300px	">
             </div>
-
-            <div class="space"></div>
-            
             <div class="text">
-
-                <p class="subtitle">
-                    上傳者：
-                    <a id="uploaded_by" href="">{{meme.uploader.username}}</a>
-                </p>
-                
-                <p class="subtitle">圖片描述</p>
-                <div class="inform">
-                    {{meme.description}}
-                </div>
-                
-                <div class="hashtag">    
-                    <label>
-                        <span>HashtagContent之類的
-                        </span>
-                    </label>
-                </div>
-
-                <p class="subtitle">留言</p>
-                <div class="comments">
+                <h2>上傳者:{{meme.uploader}}</h2>
+                <h3 class="inform">圖片描述:{{meme.description}}</h3>
+				{% for tag in tags %}
+                <p class="hashtag">{{tag.name}}</p>
+				{% endfor %}
+                <div class="comment">
+                    <h2>留言</h2>
+                    <p>要用Django設定</p>
                     {% csrf_token %}
                     {% unicorn 'comments' %}
                 </div>
-            
             </div>
-        
         </div>
     </div>    
 </body>

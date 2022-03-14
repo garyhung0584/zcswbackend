@@ -39,9 +39,7 @@
 
             <div class="title">
                 {{meme.title}}
-                {% if request.user == meme.uploader %}
                 <a href="">[編輯]</a>
-                {% endif %}
             </div>
             <!-- 這是梗圖名字 由上傳者自己設定 -->
 
@@ -56,7 +54,7 @@
 
                 <p class="subtitle">
                     上傳者：
-                    <a id="uploaded_by" href="">{{meme.uploader.username}}</a>
+                    <a id="uploaded_by" href="">{{meme.uploader}}</a>
                 </p>
                 
                 <p class="subtitle">圖片描述</p>
@@ -73,6 +71,18 @@
 
                 <p class="subtitle">留言</p>
                 <div class="comments">
+                    <p class="comment" id="first_comment">留言</p>
+                    <p class="comment">要用Django設定88888888888888888888888888888888888888888888888888888888</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
+                    <p class="comment">要用Django設定</p>
                     {% csrf_token %}
                     {% unicorn 'comments' %}
                 </div>

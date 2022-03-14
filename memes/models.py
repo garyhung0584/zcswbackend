@@ -24,7 +24,6 @@ class Photo(models.Model):
     def __str__(self):
         return self.title
 
-'''
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add= True)
@@ -33,4 +32,3 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.user.username
-'''

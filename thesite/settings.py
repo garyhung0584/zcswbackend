@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     
     'django_filters',
-    
+    'django_unicorn',
     #'main',
     'memes',
     'games',
