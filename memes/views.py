@@ -7,6 +7,7 @@ from memes.models import Photo, Tag
 from memes.forms import UploadModelForm, NewTagForm
 from .filters import Filter
 from django.views.decorators.csrf import csrf_exempt 
+import json
 
 
 def photoUpload(request):
@@ -26,6 +27,7 @@ def photoUpload(request):
             print(form)
             return render(request, template, {'form': form})
 
+@csrf_exempt
 def newTag(request):
     template = 'upload.html'
     if request.method == "GET":
@@ -34,11 +36,16 @@ def newTag(request):
         form = NewTagForm(request.POST)
         print(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/memes/upload')
+            tag = form.save()
+            return HttpResponse(json.dumps({
+                'id': tag.id,
+                'name': tag.name,
+            }))
         else:
             print(form)
-            return render(request, template, {'form':form})
+            res = HttpResponse("")
+            res.status_code = 400
+            return res
 
 def home(request):
     photolist = Photo.objects.all()

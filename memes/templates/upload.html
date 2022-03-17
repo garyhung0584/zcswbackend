@@ -6,6 +6,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'memes/css/upload.css' %}">
     <link rel="stylesheet" href="{% static 'memes/css/pop.css' %}">
+    <script defer src="{% static 'memes/js/upload.js' %}"></script>
 </head>
 <body>
 
@@ -79,10 +80,10 @@
 
                         <p class="new_hashtag_text">
                             新增HashTag
-                            <button data-pop-target="#pop" id="openpop" class="new_hashtag_field" value="new_hashtag_field">+</button>
+                            <input style="margin-top:20px" class="new_hashtag hashtag_value" id="new_hashtag" type="text">
+                            <button onclick="upload('{% url 'newTag' %}')">確認</button>
                         </p>
                         
-
                         <div class="submit">
                             <input id="submit_button" type="submit" value="繳交">
                         </div>
@@ -91,143 +92,10 @@
                 {% endblock %}
             
             </div>
-            <div class="pop" id="pop">
-                <div class="pop-header">
-                    <button data-close-button class="close-button">&times;</button>
-                </div>
-                <div class="pop-body">
-                    <p class="new_hashtag_text">
-                        新增HashTag
-                        <button data-moreinput-button class="new_hashtag_field" value="new_hashtag_field">+</button>
-                        <button data-lessinput-button data-pop-target="#pop" id="openpop" class="new_hashtag_field" value="new_hashtag_field">-</button>
-                    </p>
-                    <form id="hashtag_form" action="{% url 'newTag' %}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="new_hashtag">
-                            <label for="new_hashtag" id="new_hashtag">#</label>
-                            <!-- hashtag_value：為js取值 -->
-                            <input style="margin-top:20px" class="new_hashtag hashtag_value" id="new_hashtag" type="text" name="name">
-                            {% comment %} {{ form.name }} {% endcomment %}
-                        </div>
-                        <div class="submit" id="submit_btn">
-                            <button data-close-button class="check_button" id="cancel_btn">取消</button>
-                            <button data-submit-button class="check_button" id="report_btn" type="submit">確認</button>
-                        </div>
-                    </form>  
-                </div>
-            </div>
-            <div id="overlay"></div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        <script src="{% static 'memes/js/pop.js' %}"></script>
         </div>
     </main>
-
-    <script type="text/javascript">
-        var x=new FileReader;
-        document.forms[0].elements[1].onchange=function(){
-        x.readAsDataURL(this.files[0]);
-        }
-        x.onloadend=function(){
-        var elem = document.createElement("img");
-        elem.setAttribute("src", this.result);
-        elem.setAttribute("id", "subImg");
-        if (document.contains(document.getElementById("subImg"))) {
-            document.getElementById("subImg").remove();
-        }
-        document.getElementById("upload_pic").appendChild(elem);
-        }
-    </script>
-    <!--upload-->
-    
-    <!--
-    <div class="title">
-    </div>
-    <div class="name">
-        
-        
-    </div>
-    <div class="picture">
-        <img src="https://fakeimg.pl/400x400/"><br><br>
-        <label for="myfile">Select a file:</label>
-        <input type="file" id="myfile" name="myfile">
-    </div>
-    <div class="text">
-        <table>
-            <tr>
-                <th>
-                    <h2>梗圖name:</h2>
-                </th>
-                <th>
-                    <input id="picName">
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <h2>上傳者:</h2>
-                </th>
-                <th>
-                    <input id="picUploader">
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <h2>內容:</h2>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <input id="picDiscription">
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <p class="hashtag">標籤</p>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <button class="button">上傳</button>
-                </th>
-            </tr>
-        </table>
-        
-    </div>
-    
-    .name{
-    width: 100%;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.picture{ /*垂直致中*/
-    width: 50%;
-    height: 80%;
-    margin: auto;
-    text-align: center;   
-    position: fixed;
-    left: 0;
-}
-
-
-.text{
-    width: 50%;
-    margin: auto;
-    text-align: left;
-    line-height: 50px;
-    float: right;
-}
-
-.button {
-  background-color: #555555; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-    -->
-
 </body>
+<template id="new_tag_template">
+
+</template>
 </html>
