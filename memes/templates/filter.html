@@ -34,11 +34,12 @@
             <br>
             <h1>梗圖...</h1>
             <form action="{% url 'search' %}" method="post" enctype="multipart/form-data">
-            <div class="search">
-                <div>
-                    <input id="search_field" type="text" placeholder="Search . . ." required>
+                {% csrf_token %}
+                <div class="search">
+                    <div>
+                        <input id="search_field" type="text" placeholder="Search . . ." required>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
 
@@ -51,7 +52,7 @@
         {% block content %}
         <div class="photo">
             {% for photo in photos %}
-                <a href="{% url 'picture' photo.id %}" class="memetitle">
+                <a href="{% url 'search' photo.id %}" class="memetitle">
                 <img src="{{ photo.image.url }}"/>
                 </a>
             {% endfor %}
@@ -81,10 +82,6 @@
         {% endfor %} 
         </div> {% endcomment %}
     </div>
-    <script>
-        $('#search_field').change(function(){
-            $('#your_form').submit()
-        });
-    </script>
+
     </body>
 </html>

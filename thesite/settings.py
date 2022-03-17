@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'games',
     'taggit',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
