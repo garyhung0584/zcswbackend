@@ -12,4 +12,4 @@ class Member(models.Model):
     def __str__(self):
         if self.user:
             return self.user.username
-    '''
+'''
