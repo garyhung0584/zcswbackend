@@ -21,9 +21,17 @@ def index(request):
     return render(request, 'index.html',{
     })
 
+'''
 @login_required(login_url='login')
 def userinfo(request):
     return render(request, 'personal_info.html')
+'''
+
+def userinfo(request, pk):
+    user = User.objects.get(id=pk)
+    return render(request, 'personal_info.html',{
+        'user' : user,
+    })
         
 @login_required(login_url='login')
 def useredit(request):

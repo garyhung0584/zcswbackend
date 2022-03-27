@@ -43,16 +43,16 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     
     'django_filters',
-    'django_unicorn',
     #'main',
-    'memes',
     'games',
     #'taggit',
     #'rest_framework',
+    'django_unicorn',
+    'memes',
     
     #'django.contrib.sites',
     #'oauth_app',
-    'allauth',
+    #'allauth',
     #'allauth.account',
     #'allauth.socialaccount',
     #'allauth.socialaccount.providers.google',
@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'thesite.urls'
 
