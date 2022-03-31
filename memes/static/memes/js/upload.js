@@ -17,4 +17,5 @@ async function upload(url) {
     ${tag.name}`
   console.log(elem)
   document.getElementById('hashtag_div').children[0].appendChild(elem);
+  document.getElementById('new_hashtag').value = ""
 }

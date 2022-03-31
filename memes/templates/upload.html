@@ -67,20 +67,28 @@
                         </div>
 
                         <p class="add_hashtag_text">加入HashTag</p>
-                        <div id="hashtag_div">
-                            
-                            <label>
-                                {% for tags in form.tags %}    
-                                {{ tags }}
-                                <span></span>
-                                {% endfor %}
-                            </label>
-                            
+                        <div id="hashtag_div" class="hashtag">
+                            {% for tag in form.tags %}    
+                            {{ tag }}
+                            {% endfor %}
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                $(" ").click(function(){
+                                    if($(this).prop("checked")){
+                                        改class
+                                    }
+                                    else{
+                                        回到class
+                                    }
+                                })
+                            })
+                            
+                        </script>
 
                         <p class="new_hashtag_text">
                             新增HashTag
-                            <input style="margin-top:20px" class="new_hashtag hashtag_value" id="new_hashtag" type="text">
+                            <input class="new_hashtag hashtag_value" id="new_hashtag" type="text">
                             <button onclick="upload('{% url 'newTag' %}')">確認</button>
                         </p>
                         
@@ -94,6 +102,21 @@
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+        var x=new FileReader;
+        document.forms[0].elements[1].onchange=function(){
+        x.readAsDataURL(this.files[0]);
+        }
+        x.onloadend=function(){
+        var elem = document.createElement("img");
+        elem.setAttribute("src", this.result);
+        elem.setAttribute("id", "subImg");
+        if (document.contains(document.getElementById("subImg"))) {
+            document.getElementById("subImg").remove();
+        }
+        document.getElementById("upload_pic").appendChild(elem);
+        }
+    </script>
 </body>
 <template id="new_tag_template">
 
