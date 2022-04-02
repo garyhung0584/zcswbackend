@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     
     'main.apps.MainConfig',
     
-    'django_filters',
+    #'django_filters',
     #'main',
     'games',
     #'taggit',

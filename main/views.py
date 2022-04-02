@@ -16,8 +16,15 @@ from .tokens import account_activation_token
 from .models import Member
 from .forms import RegisterForm, UserEditForm
 
+def registered(request):
+
+    
+    return render(request, 'registered.html',{
+    })
 
 def index(request):
+
+    return HttpResponse('Check email')
     return render(request, 'index.html',{
     })
 
@@ -67,7 +74,8 @@ def register(request):
                 mail_subject,message,to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return HttpResponseRedirect('registered')
+            #return HttpResponse('Please confirm your email address to complete the registration')
     else:
         form = RegisterForm()
     return render(request, 'register.html',{
