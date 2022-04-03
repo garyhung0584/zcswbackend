@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Member(models.Model):
     user = models.OneToOneField(User, null = True, on_delete = models.CASCADE)
+    username = models.CharField(null=False, blank=True, max_length=16, default='noname')
     intro = models.CharField(default = 'Intro not entered', max_length = 512, blank = True, null = True)
     imguploaded = models.IntegerField(default = 0, null = True)
     likes = models.IntegerField(default = 0, null = True)

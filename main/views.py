@@ -16,15 +16,7 @@ from .tokens import account_activation_token
 from .models import Member
 from .forms import RegisterForm, UserEditForm
 
-def registered(request):
-
-    
-    return render(request, 'registered.html',{
-    })
-
 def index(request):
-
-    return HttpResponse('Check email')
     return render(request, 'index.html',{
     })
 
@@ -82,6 +74,10 @@ def register(request):
             'form' : form
     })
 
+def registered(request):
+    return render(request, 'registered.html',{
+    })
+
 '''
             auth.login(request,user)
             
@@ -119,7 +115,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         auth.login(request, user)
-        #return HttpResponseRedirect('main')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return HttpResponseRedirect('useredit')
+        #return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')

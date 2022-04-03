@@ -26,7 +26,7 @@
 
         <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
         <ul class="menu_dropdown">
-            <li><a href="{% url 'userinfo' %}">個人資料</a></li>
+            <li><a href="{% url 'userinfo' request.user.id %}">個人資料</a></li>
             <li><a href="#">blablabla</a></li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">登出</a></li>
         </ul>
