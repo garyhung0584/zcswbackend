@@ -25,3 +25,14 @@ class UserEditForm(forms.ModelForm):
         model = Member
         fields = '__all__'
         exclude = ['user', 'imguploaded', 'likes']
+        
+        
+    def __init__(self, *args, **kwargs):
+        super.UserEditForm,
+        
+            def __init__(self, *args, **kwargs):
+        super(YourModelForm, self).__init__(*args, **kwargs)
+        self.fields['city'].widget.attrs.update({
+            'autocomplete': 'off'
+        })
+

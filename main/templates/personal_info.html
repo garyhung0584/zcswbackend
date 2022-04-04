@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        {% load static %}
+		{% load static %}
         <link href="{% static 'main/css/personal_info.css' %}" rel="stylesheet" media="all">
         <title>個人信息</title>
-        {% load static %}
         <link href="{% static 'main/css/navbar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'main/css/pop.css' %}" rel="stylesheet" media="all">
     </head>
 
     <body>
@@ -30,7 +30,7 @@
         <!-- Navbar -->
 
         <main class="container">
-            <div >
+            <div id="person_photo_div">
                 <img id="person_photo" src="{{user.member.profile_pic.url}}" alt="個人照片">
             </div>
             <div id="bio">
@@ -49,10 +49,61 @@
                     <p id="likenum">{{user.likes}}</p>
                 </div>
             </div>
-            {% if request.user == user %}
-            <div><a href="{% url 'useredit' %}" id="change">變更個人資料</a></div>
-            {% endif %}
+
+			{% if request.user == user %}
+            <div><a id="change"><button data-pop-target="#pop" id="openpop">變更個人資料</button></a></div>
+			{% endif %}
             <div class="meme"></div>
+
+
+            <div class="pop" id="pop">
+                <div class="pop-header">
+                    <button data-close-button class="close-button">&times;</button>
+                </div>
+                <div class="pop-body">
+                    <form method='POST' action="">
+                        {% csrf_token %}
+                        <div id="photo_box">
+                            <div id="photo_div" class="photo_div"><div id="photo"></div></div>
+                            <div class="upload_pic">
+                                <label>
+                                    {{form.profile_pic|attr:"onchange:display_image(event)"}}
+                                <input id="upload_pic" type="file" onchange="display_image(event)">
+                                上傳相片
+                                </label>
+                            </div>
+                        </div>
+                        <div id="info">
+                            <div class="group">
+                                <label for="account_name" class="label">帳號/名稱：<span id="account_name" class="account_name_class">{{form.username}}</span></label>
+                                
+                                <label for="email" class="label">電子信箱：<span id="email" class="email_class"></span></label>
+                                
+                                <form>
+                                    <label for="content" class="label">簡介：</label>
+                                    {{form.intro}}
+                                    <textarea id="content" row="3" class="content"></textarea>
+                                </form>
+                                <div class="submit" id="submit_btn">
+                                    <button data-close-button class="check_button" id="cancel_btn">取消</button>
+                                    <button data-submit-button class="check_button" id="report_btn">確認</button>
+                                    <input data-submit-button type="submit" class="check_button" id="report_btn" value="確認">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="pop_image" id="pop_image">
+
+            </div>
+
+            <div id="overlay"></div>
+            <div id="overlay2"></div>
+            
         </main>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="{% static 'main/js/pop.js' %}"></script>
     </body>
+    
 </html>
