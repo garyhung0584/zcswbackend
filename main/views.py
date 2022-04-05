@@ -50,7 +50,7 @@ def useredit(request):
         form = UserEditForm(request.POST, request.FILES, instance=member)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/main/userinfo')
+            return HttpResponseRedirect('/main/userinfo/'+str(request.user.pk))
     
     context = {'form':form}
     return render(request, 'useredit.html', context)
@@ -124,7 +124,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         auth.login(request, user)
-        return HttpResponseRedirect('useredit')
-        #return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        #return HttpResponseRedirect('useredit')
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')

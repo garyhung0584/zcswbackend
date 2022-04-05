@@ -167,7 +167,6 @@
   border-radius: 50%;
 }
 
-
 #photo img{
   width: 100%;
   height: 100%;
@@ -180,7 +179,6 @@
   height:80%;
   
 }
-
 
 #info{
     float: left;
@@ -228,12 +226,12 @@
   margin-top:5%;
 }
 
-.id_profile_pic{
+.upload_pic{
   height:20%;
 }
 
 
-.id_profile_pic label{
+.upload_pic label{
   position: relative;
   display:inline-block;
   left:50%;
@@ -247,14 +245,14 @@
   font: 600 25px 'Open Sans', sans-serif;
   cursor: pointer;
 }
-.id_profile_pic label:hover{
+.upload_pic label:hover{
   background-color: #878787;
 }
-.id_profile_pic label:active{
+.upload_pic label:active{
   animation-name: upload_button;
   animation-duration: 0.5s;
 }
-.id_profile_pic button{
+.upload_pic a, .upload_pic input, .upload_pic >label>label{
   display: none;
 }
 
@@ -266,4 +264,8 @@
 #person_photo{
   object-fit: cover;
   border-radius: 50%;
+}
+
+form{
+  
 }

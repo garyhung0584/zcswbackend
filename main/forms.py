@@ -28,11 +28,7 @@ class UserEditForm(forms.ModelForm):
         
         
     def __init__(self, *args, **kwargs):
-        super.UserEditForm,
-        
-            def __init__(self, *args, **kwargs):
-        super(YourModelForm, self).__init__(*args, **kwargs)
-        self.fields['city'].widget.attrs.update({
-            'autocomplete': 'off'
+        super(UserEditForm, self).__init__(*args, **kwargs)
+        self.fields['profile_pic'].widget.attrs.update({
+            'onchange' : 'display_image(event)'
         })
-

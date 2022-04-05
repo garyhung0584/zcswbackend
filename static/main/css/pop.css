@@ -115,7 +115,7 @@
     z-index: 8;
   }
 
-  .submit input{
+  .submit button{
     padding: 3px 40px;
     color: #ffffff;
     background-color: #545454;
@@ -127,11 +127,11 @@
     cursor: pointer;
   }
 
-  .submit input#cancel_btn{
+  .submit button#cancel_btn{
       margin-right: 20px;
   }
 
-  .submit input:hover{
+  .submit button:hover{
     background-color: #757575;
   }
   
@@ -140,7 +140,7 @@
     to{background-color: #757575;}
   }
 
-  .submit input:active{
+  .submit button:active{
     animation-name: submit_button;
     animation-duration: 0.5s;
     top: -47px;
@@ -228,12 +228,12 @@
   margin-top:5%;
 }
 
-.upload_pic{
+#id_profile_pic{
   height:20%;
 }
 
 
-.upload_pic label{
+#id_profile_pic label{
   position: relative;
   display:inline-block;
   left:50%;
@@ -247,14 +247,14 @@
   font: 600 25px 'Open Sans', sans-serif;
   cursor: pointer;
 }
-.upload_pic label:hover{
+#id_profile_pic label:hover{
   background-color: #878787;
 }
-.upload_pic label:active{
+#id_profile_pic label:active{
   animation-name: upload_button;
   animation-duration: 0.5s;
 }
-.upload_pic input{
+#id_profile_pic button{
   display: none;
 }
 
