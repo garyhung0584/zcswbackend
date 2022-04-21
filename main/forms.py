@@ -23,8 +23,8 @@ class UserEditForm(forms.ModelForm):
     
     class Meta:
         model = Member
-        fields = '__all__'
-        exclude = ['user', 'imguploaded', 'likes']
+        fields = ('profile_pic','username','intro')
+        #exclude = ['user', 'imguploaded', 'likes']
         
         
     def __init__(self, *args, **kwargs):

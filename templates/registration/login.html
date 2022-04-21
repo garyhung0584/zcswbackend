@@ -45,6 +45,9 @@
                                 <div class="group">
                                     <input type="submit" class="button" value="登入">
                                 </div>
+								{% if form.errors %}
+								<p style="color: red">Invalid Information</p>
+								{% endif %}
                                 <div class="hr"></div>
                                 <div class="below">
                                     <a href="{% url 'register' %}">創建帳號</a>

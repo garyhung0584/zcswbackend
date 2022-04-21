@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.home, name='memes'),
     path('upload', views.photoUpload, name='upload'),
     path('picture/<str:pk>/', views.picture, name='picture'),
+    path('picture/<str:pk>/report', views.report, name='report'),
 ]

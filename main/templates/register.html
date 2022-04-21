@@ -46,9 +46,13 @@
 									<label for="password" class="label">確認密碼</label>
 									{{ form.password2 }}
 								</div>
+								{% comment %}
 								{% for error in form.errors %}
 								<p style="color: red">{{ error }}</p>
-								{% endfor %}  
+								{% endfor %} {% endcomment %}
+								{% if form.errors %}
+								<p style="color: red">Invalid Information</p>
+								{% endif %}
 								<div class="group">
 									<input type="submit" class="button" value="註冊帳號">
 								</div>

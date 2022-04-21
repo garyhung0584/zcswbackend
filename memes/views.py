@@ -38,6 +38,15 @@ def picture(request, pk):
         'meme' : meme,
         'tags' : tags
     })
+    
+
+@login_required(login_url='login')
+def report(request, pk):
+    meme = Photo.objects.get(id = pk)
+    tags = meme.tags.all()
+    return render(request, 'picture.html',{
+        'meme' : meme,
+    })
 
 @login_required(login_url='login')
 def delete_picture(request, pk):

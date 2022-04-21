@@ -28,17 +28,22 @@ def userinfo(request):
 
 def userinfo(request, pk):
     user = User.objects.get(id=pk)
-    member = request.user.member
-    form = UserEditForm(instance=member)
-    if request.method == 'POST':
-        form = UserEditForm(request.POST, request.FILES, instance=member)
-        if form.is_valid():
-            form.save()
+    if request.user == user:
+        member = request.user.member
+        form = UserEditForm()
+        if request.method == 'GET':
+            return render(request, 'personal_info.html', {'user' : user,'form' : form})
+        if request.method == 'POST':
+            form = UserEditForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
             return HttpResponseRedirect('/main/userinfo/'+str(request.user.pk))
-    
+        return render(request, 'personal_info.html',{
+            'user' : user,
+            'form' : form,
+        })
     return render(request, 'personal_info.html',{
         'user' : user,
-        'form' : form,
     })
 
 @login_required(login_url='login')

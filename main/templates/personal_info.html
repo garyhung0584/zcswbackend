@@ -18,7 +18,10 @@
                 <a href="{% url 'games' %}">GAME</a>
             </p>
             <p class="menu_right">
-                <a id="id">{{ request.user.username }}</a>
+				{% if not request.user.is_authenticated %}
+				<a href="{% url 'login'%}?next={% url 'main' %}" id="id">Login</a>
+				{% else %}
+				<a id="id">{{ request.user.get_username }}</a>
             </p>
             <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
             <ul class="menu_dropdown">
@@ -26,6 +29,7 @@
                 <li><a href="#">blablabla</a></li>
                 <li><a href="{% url 'logout'%}?next={{request.path}}">登出</a></li>
             </ul>
+			{% endif %}
         </nav>
         <!-- Navbar -->
 
@@ -66,8 +70,8 @@
                                 <div id="photo_div" class="photo_div"><div id="photo"><img src="{{user.member.profile_pic.url}}" alt=""></div></div>
                                 <div class="upload_pic">
                                     <label>
-                                    <!--{{form.profile_pic}}-->
-                                    <input id="id_profile_pic" type="file" name="profile_pic" accept="image/*" onchange="display_image(event)">
+                                    {{form.profile_pic}}
+                                    <!-- <input id="id_profile_pic" type="file" name="profile_pic" accept="image/*" onchange="display_image(event)"> -->
                                     上傳相片
                                     </label>
                                 </div>
@@ -90,11 +94,11 @@
                             </div>
                         </form>
                     </div>
+            {% endif %}
             </div>
             <div class="pop_image" id="pop_image">
 
             </div>
-            {% endif %}
 
             <div id="overlay"></div>
             <div id="overlay2"></div>
