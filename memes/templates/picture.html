@@ -43,9 +43,10 @@
             <div class="text">
                 <h2>上傳者:{{meme.uploader}}</h2>
                 <h3 class="inform">圖片描述:{{meme.description}}</h3>
-				{% for tag in tags %}
-                <p class="hashtag">{{tag.name}}</p>
+				{% for tag in meme.tags.all %}
+                    <p class="hashtag">{{tag}}</p>
 				{% endfor %}
+                {% comment %} <p class="hashtag">{{meme.tags.name}}</p> {% endcomment %}
                 <div class="comment">
                     <h2>留言</h2>
                     <p>要用Django設定</p>

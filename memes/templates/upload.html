@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'memes/css/upload.css' %}">
     <link rel="stylesheet" href="{% static 'memes/css/pop.css' %}">
     <script defer src="{% static 'memes/js/upload.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -68,28 +69,31 @@
 
                         <p class="add_hashtag_text">加入HashTag</p>
                         <div id="hashtag_div" class="hashtag">
-                            {% for tag in form.tags %}    
-                            {{ tag }}
+                            {% for tag in form.fields.tags.queryset %}    
+                            <label for="checkbox-{{ tag }}">
+                                <input name="tags" id="checkbox-{{ tag }}" type="checkbox" value="{{ tag.id }}">
+                                <span>{{ tag }}</span>
+                            </label>
                             {% endfor %}
                         </div>
-                        <script>
+                        {% comment %} <script>
                             $(document).ready(function(){
-                                $(" ").click(function(){
-                                    if($(this).prop("checked")){
-                                        改class
+                                $("hey").click(function(){
+                                    console.log($(this))
+                                    if($(this).children('input').prop("checked")){
+                                        $(this).children('input').addClass("hashtag_checked");
                                     }
                                     else{
-                                        回到class
+                                        $(this).children('input').removeClass("hashtag_checked");
                                     }
                                 })
                             })
-                            
-                        </script>
+                        </script> {% endcomment %}
 
                         <p class="new_hashtag_text">
                             新增HashTag
-                            <input class="new_hashtag hashtag_value" id="new_hashtag" type="text">
-                            <button onclick="upload('{% url 'newTag' %}')">確認</button>
+                            <input class="new_hashtag hashtag_value" id="new_hashtag" type="text" onkeypress="return event.keyCode!=13">
+                            <button id="new_hashtag_button">確認</button>
                         </p>
                         
                         <div class="submit">
@@ -103,6 +107,7 @@
         </div>
     </main>
     <script type="text/javascript">
+        const tagUrl = `{% url 'newTag' %}`;
         var x=new FileReader;
         document.forms[0].elements[1].onchange=function(){
         x.readAsDataURL(this.files[0]);
@@ -118,7 +123,4 @@
         }
     </script>
 </body>
-<template id="new_tag_template">
-
-</template>
 </html>

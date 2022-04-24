@@ -1,0 +1,9 @@
+<!DOCTYPE>
+<html>
+    <body>
+        <h1>{{ tag.name }}</h1>
+        {% for photo in tag.photos.all %}
+            <p>{{ photo.title }}</p>
+        {% endfor %}
+    </body>
+</html>

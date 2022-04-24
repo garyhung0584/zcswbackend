@@ -1,3 +1,9 @@
+const button = document.getElementById("new_hashtag_button")
+button.addEventListener('click', async (ev) => {
+  await upload(tagUrl);
+  ev.preventDefault();
+})
+
 async function upload(url) {
   const name = document.getElementById('new_hashtag').value;
   const form = new FormData();
@@ -14,8 +20,9 @@ async function upload(url) {
   const elem = document.createElement("label");
   elem.innerHTML = `
     <input type="checkbox" name="tags" value="${tag.id}">
-    ${tag.name}`
+    <span>${tag.name}</span>`
   console.log(elem)
-  document.getElementById('hashtag_div').children[0].appendChild(elem);
+  document.getElementById('hashtag_div').appendChild(elem);
   document.getElementById('new_hashtag').value = ""
+  return false
 }

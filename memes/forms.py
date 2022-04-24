@@ -14,3 +14,7 @@ class UploadModelForm(forms.ModelForm):
         widgets = {
             'tags': forms.CheckboxSelectMultiple
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['tags'].widget.attrs.update({'class': 'hey'})

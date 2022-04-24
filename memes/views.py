@@ -24,7 +24,7 @@ def photoUpload(request):
             return redirect('/memes')
         else:
             print("Fuck")
-            print(form)
+            print(form.errors)
             return render(request, template, {'form': form})
 
 @csrf_exempt
@@ -56,10 +56,14 @@ def home(request):
 
 def picture(request, pk):
     meme = Photo.objects.get(id = pk)
-    tags = meme.tags.all()
     return render(request, 'picture.html',{
         'meme' : meme,
-        'tags' : tags
+    })
+
+def tag(request, pk):
+    tag = Tag.objects.get(name = pk)
+    return render(request, 'tag.html',{
+        'tag' : tag,
     })
 
 def delete_picture(request, pk):

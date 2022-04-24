@@ -6,6 +6,7 @@ from django.conf import settings
 
 class Tag(models.Model):
     name = models.CharField(max_length = 200)
+
     def __str__(self):
         return self.name
 
@@ -17,7 +18,7 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='memes/', blank = False, null = True)
     upload_date = models.DateTimeField(auto_now_add = True, null = True)
     description = models.TextField(blank = True, max_length = 256, null = True)
-    tags = models.ManyToManyField(Tag, blank = True)
+    tags = models.ManyToManyField(Tag, blank = True, related_name="photos")
     
 
     def __str__(self):
