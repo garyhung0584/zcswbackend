@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>LoginPage</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+    </head>
+    <body>
+        <nav class="menu">
+            <p class="menu_left">
+                <a href="{% url 'main'%}">HOME</a>
+                <a href="{% url 'games'%}">GAME</a>
+                <a href="{% url 'memes'%}">MEME</a>
+            </p>
+        </nav>
+
+        <main>
+            <div class="LogIn_box">    
+                <div class="LogIn">
+                    {% if user.is_authenticated %}
+                    <div>
+                        <span class="message">Hello there, {{ user.get_username }}<br><p class="message2">Trying to
+                        <a href="{% url 'logout'%}?next={% url 'login' %}">Logout?</a></p></span>
+                    </div>
+                    {% else %}
+					<div class="EMAIL_confirm">
+						<img src="{% static 'main/img/icons8-message-read.gif'%}" class="email_img">
+						<h2 class="email_confirm">Please confirm your email address to complete the registration</h2>
+					</div>
+                    {% endif %}
+
+					
+				</div>
+            </div>
+        </main>
+    </body>
+</html>

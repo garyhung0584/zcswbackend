@@ -1,0 +1,8 @@
+<div>
+    <!-- <p class="comment" id="first_comment">留言</p> -->
+    <p><textarea u:model.lazy="content" name="" id="" cols="60" rows="5" placeholder="Leave a comment..."></textarea></p>
+    <p><button u:click="submit" title="Comment">Submit</button></p>
+    {% for comment in comments %}
+        <p class="comment">{{comment.content}}</p>
+    {% endfor %}
+</div>

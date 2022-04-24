@@ -21,7 +21,7 @@
                     {% if user.is_authenticated %}
                     <div>
                         <span class="message">Hello there, {{ user.get_username }}<br><p class="message2">Trying to
-                        <a href="{% url 'logout'%}?next={{request.path}}">Logout?</a></p></span>
+                        <a href="{% url 'logout'%}?next={% url 'login' %}">Logout?</a></p></span>
                     </div>
                     {% else %}
                     <input id="tab-1" type="radio" name="tab" class="SignIn"><label for="tab-1" class="tab"></label>
@@ -46,6 +46,13 @@
 									<label for="password" class="label">確認密碼</label>
 									{{ form.password2 }}
 								</div>
+								{% comment %}
+								{% for error in form.errors %}
+								<p style="color: red">{{ error }}</p>
+								{% endfor %} {% endcomment %}
+								{% if form.errors %}
+								<p style="color: red">Invalid Information</p>
+								{% endif %}
 								<div class="group">
 									<input type="submit" class="button" value="註冊帳號">
 								</div>

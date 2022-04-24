@@ -45,10 +45,13 @@
                                 <div class="group">
                                     <input type="submit" class="button" value="登入">
                                 </div>
+								{% if form.errors %}
+								<p style="color: red">Invalid Information</p>
+								{% endif %}
                                 <div class="hr"></div>
                                 <div class="below">
                                     <a href="{% url 'register' %}">創建帳號</a>
-                                    <a href="#">忘記密碼？</a>
+                                    <a href="{% url 'password_reset' %}">忘記密碼？</a>
                                 </div>
                             </form>
                         </div>

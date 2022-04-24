@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-nt4ieg4w*!n=id#n42&gmx4#7p&ke&9!v7$v*z=)h*x6+imy7k
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['meme.wancat.cc']
 
 
 # Application definition
@@ -41,12 +42,13 @@ INSTALLED_APPS = [
     
     'main.apps.MainConfig',
     
+    #'django_filters',
     #'main',
-    'memes',
     'games',
     'taggit',
     'rest_framework',
     'django_filters',
+    'django_unicorn',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'thesite.urls'
 
@@ -123,10 +126,31 @@ USE_L10N = True
 
 USE_TZ = True
 
+'''
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SITE_ID = 2
+'''
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'memes', 'static'),
@@ -140,8 +164,15 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/main/'
 
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jamie77899@gmail.com'
+EMAIL_HOST_PASSWORD = 'jamie99877'
