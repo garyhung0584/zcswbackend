@@ -46,10 +46,10 @@
 									<label for="password" class="label">確認密碼</label>
 									{{ form.password2 }}
 								</div>
-								{% comment %}
+								
 								{% for error in form.errors %}
 								<p style="color: red">{{ error }}</p>
-								{% endfor %} {% endcomment %}
+								{% endfor %}
 								{% if form.errors %}
 								<p style="color: red">Invalid Information</p>
 								{% endif %}

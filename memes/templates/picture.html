@@ -47,8 +47,8 @@
 
             <div class="picture">
                 <img src="{{meme.image.url}}">
-                <a href="">覺得這個圖片有問題？</a>
-                {% comment %}<a href="{% url 'report' meme.id %}">覺得這個圖片有問題？</a>{% endcomment %}
+                <p>覺得這個圖片有問題？</p>
+                {% comment %} <a href="{% url 'report' meme.id %}">覺得這個圖片有問題？</a> {% endcomment %}
             </div>
 
             <div class="space"></div>
@@ -57,7 +57,7 @@
                 <h2>上傳者:{{meme.uploader}}</h2>
                 <h3 class="inform">圖片描述:{{meme.description}}</h3>
 				{% for tag in meme.tags.all %}
-                    <p class="hashtag">{{tag}}</p>
+                    <p class="hashtag"><a href="/memes/tag/{{ tag }}">{{tag}}</a></p>
 				{% endfor %}
                 {% comment %} <p class="hashtag">{{meme.tags.name}}</p> {% endcomment %}
                 <p class="subtitle">留言</p>

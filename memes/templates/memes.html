@@ -44,10 +44,15 @@
         </div>
 
         <div class="hashtag">
+            {% for tag in tag %}
             <label>
                 <input type="checkbox">
-                <span>壹貳參肆伍</span>
+                <span>
+                    <a href="/memes/tag/{{ tag }}">{{ tag }}</a>
+                </span>
+                
             </label>
+            {% endfor %}
         </div>
         {% block content %}
         <div class="photo">

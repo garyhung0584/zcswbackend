@@ -206,7 +206,13 @@ body{
 ::-webkit-scrollbar {
     display: none;
 }
-
+.hashtag span a{
+    text-decoration: none;
+    color: #3366BB;
+}
+.hashtag span a:visited{
+    color: #3366BB;
+}
 .hashtag label{
     cursor: pointer;
 }
