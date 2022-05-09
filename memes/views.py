@@ -13,8 +13,10 @@ import json
 
 def home(request):
     photolist = Photo.objects.all()
+    tag = Tag.objects.all()
     return render(request, 'memes.html',{
-        'photos' : photolist
+        'photos' : photolist,
+        'tag' : tag
     })
 
 @login_required(login_url='login')
@@ -55,12 +57,6 @@ def newTag(request):
             res.status_code = 400
             return res
 
-def home(request):
-    photolist = Photo.objects.all()
-
-    return render(request, 'memes.html',{
-        'photos' : photolist
-    })
 
 def picture(request, pk):
     meme = Photo.objects.get(id = pk)
