@@ -5,8 +5,8 @@ from django.views import generic
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 
-from memes.models import Photo, Tag
-from memes.forms import UploadModelForm, NewTagForm
+from memes.models import Photo, Tag, Comment
+from memes.forms import UploadModelForm, NewTagForm, CommentForm
 from .filters import Filter
 from django.views.decorators.csrf import csrf_exempt 
 import json
@@ -60,8 +60,26 @@ def newTag(request):
 
 def picture(request, pk):
     meme = Photo.objects.get(id = pk)
+    #post_comments_count = Comment.objects.get(id = pk)
+    post_comments = Comment.objects.all().filter(post=Photo.objects.get(id = pk))
+    form = CommentForm(initial={'user':request.user,'post': meme})
+    if request.method == "GET":
+        return render(request, 'picture.html', {
+            'meme' : meme,
+            'form' : form,
+            'post_comments' : post_comments,
+            #'post_comments_count' : post_comments_count,
+        })
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/memes/picture/'+pk)
     return render(request, 'picture.html',{
         'meme' : meme,
+        'form' : form,
+        'post_comments' : post_comments,
+        #'post_comments_count' : post_comments_count,
     })
 
 def tag(request, pk):

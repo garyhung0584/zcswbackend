@@ -52,6 +52,10 @@
 								{% endfor %}
 								{% if form.errors %}
 								<p style="color: red">Invalid Information</p>
+								<p style="color: red">Your password can’t be too similar to your other personal information.
+Your password must contain at least 8 characters.
+Your password can’t be a commonly used password.
+Your password can’t be entirely numeric.</p>
 								{% endif %}
 								<div class="group">
 									<input type="submit" class="button" value="註冊帳號">

@@ -26,10 +26,10 @@ class Photo(models.Model):
         return self.title
 
 class Comment(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #post = models.ForeignKey(Photo, related_name="comments", on_delete=models.CASCADE)
-    content = models.TextField()
-    date = models.DateTimeField(auto_now_add= True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    post = models.ForeignKey(Photo, related_name="comments", on_delete=models.CASCADE, null = True)
+    content = models.TextField(null = True)
+    date = models.DateTimeField(auto_now_add= True, null = True)
     
     def __str__(self):
         return self.content[:50]

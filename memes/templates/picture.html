@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-{% load unicorn %}
 {% load static %}
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
     <title>梗圖｜name｜詳細資料</title>
     <link rel="stylesheet" href="{% static 'memes/css/picture.css' %}">
     <link rel="stylesheet" href="{% static 'memes/css/navbar.css' %}">
-    {% unicorn_scripts %}
 </head>
 <body>
     <!-- Navbar -->
@@ -62,8 +60,17 @@
                 {% comment %} <p class="hashtag">{{meme.tags.name}}</p> {% endcomment %}
                 <p class="subtitle">留言</p>
                 <div class="comments">
-                    {% csrf_token %}
-                    {% unicorn 'comments' %}
+                    <form method="POST" action=>
+                        {% csrf_token %}
+						{{form.user.as_hidden}}
+						{{form.post.as_hidden}}
+                        {{form.content}}
+                        <button type="submit">Comment</button>
+                    </form>
+                    <p class="comment" id="first_comment">留言</p>
+					{% for comment in post_comments %}
+					<p class="comment">{{comment}}</p>
+					{% endfor %}
                 </div>
             
             </div>
