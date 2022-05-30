@@ -5,4 +5,11 @@ urlpatterns = [
     path('', views.home, name='memes'),
     path('upload', views.photoUpload, name='upload'),
     path('picture/<str:pk>/', views.picture, name='picture'),
+<<<<<<< Updated upstream
+=======
+    path('tag/<str:pk>/', views.tag, name='tag'),
+    path('filter', views.filter, name='search'),
+    path('newTag', views.newTag, name='newTag'),
+    # path('picture/<str:pk>/report', views.report, name='report'),
+>>>>>>> Stashed changes
 ]
