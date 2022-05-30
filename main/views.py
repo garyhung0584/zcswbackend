@@ -82,8 +82,7 @@ def register(request):
             #email.send()
             return HttpResponseRedirect('registered')
             #return HttpResponse('Please confirm your email address to complete the registration')
-    else:
-    
+
 def userinfo(request):
     if request.user.is_authenticated:
         return render(request, 'personal_info.html')
