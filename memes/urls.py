@@ -8,6 +8,5 @@ urlpatterns = [
     path('picture/<str:pk>/', views.picture, name='picture'),
     path('tag/<str:pk>/', views.tag, name='tag'),
     path('filter', views.filter, name='search'),
-    path('newTag', views.newTag, name='newTag')
-    # path('picture/<str:pk>/report', views.report, name='report'),
+    path('newTag', views.newTag, name='newTag'),
 ]

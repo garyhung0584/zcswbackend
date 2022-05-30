@@ -1,4 +1,10 @@
+
 from re import template
+import email
+from email import message
+from email.message import EmailMessage
+from re import template
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
@@ -6,7 +12,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 
 from memes.models import Photo, Tag, Comment
-from memes.forms import UploadModelForm, NewTagForm, CommentForm
+from memes.forms import UploadModelForm, NewTagForm, CommentForm, ReportForm
 from .filters import Filter
 from django.views.decorators.csrf import csrf_exempt 
 import json
@@ -33,9 +39,42 @@ def photoUpload(request):
             form.save()
             return redirect('/memes')
         else:
-            print("Fuck")
+            print(form.errors)
+            print(form)
+            return render(request, template, {'form': form})
+
+
+def picture(request, pk):
+    meme = Photo.objects.get(id = pk)
+    template = 'picture.html'
+    form = ReportForm(initial={'reporter':request.user,'post': meme})
+    if request.method == "GET":
+        return render(request, template, {
+            'meme' : meme,
+            'form' : form,
+        })
+
+    if request.method == 'POST':
+        form = ReportForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = request.user.email
+            mail_subject ='Report successfully'
+            message = 'Report successfully'
+            to_email = 'jamie44566@gmail.com'
+            email = EmailMessage(
+                mail_subject,message,settings.EMAIL_HOST_USER,[to_email]
+            )
+            email.send()
+            return redirect('/memes/picture/'+pk)
+        else:
             print(form.errors)
             return render(request, template, {'form': form})
+
+    return render(request, 'picture.html',{
+        'meme' : meme, 
+        'form' : form,
+    })
 
 @csrf_exempt
 def newTag(request):
@@ -58,7 +97,8 @@ def newTag(request):
             return res
 
 
-def picture(request, pk):
+@login_required(login_url='login')
+def report(request, pk):
     meme = Photo.objects.get(id = pk)
     #post_comments_count = Comment.objects.get(id = pk)
     post_comments = Comment.objects.all().filter(post=Photo.objects.get(id = pk))
@@ -96,7 +136,6 @@ def report(request, pk):
     return render(request, 'picture.html',{
         'meme' : meme,
     })
-
 @login_required(login_url='login')
 def delete_picture(request, pk):
     if request.method == 'POST':
