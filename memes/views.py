@@ -1,6 +1,6 @@
-
-from re import template
 import email
+import json
+from re import template
 from email import message
 from email.message import EmailMessage
 from re import template
@@ -10,12 +10,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt 
 
+from .filters import Filter
 from memes.models import Photo, Tag, Comment
 from memes.forms import UploadModelForm, NewTagForm, CommentForm, ReportForm
-from .filters import Filter
-from django.views.decorators.csrf import csrf_exempt 
-import json
 
 def home(request):
     photolist = Photo.objects.all()
@@ -47,33 +47,48 @@ def photoUpload(request):
 def picture(request, pk):
     meme = Photo.objects.get(id = pk)
     template = 'picture.html'
+    post_comments = Comment.objects.all().filter(post=Photo.objects.get(id = pk))
     form = ReportForm(initial={'reporter':request.user,'post': meme})
+    commentform = CommentForm(initial={'user':request.user,'post': meme})
     if request.method == "GET":
         return render(request, template, {
             'meme' : meme,
             'form' : form,
+            'commentform' : commentform,
+            'post_comments' : post_comments,
         })
 
-    if request.method == 'POST':
+    if request.method == 'POST' and 'report' in request.POST:
         form = ReportForm(request.POST)
         if form.is_valid():
             form.save()
+            send_mail(
+                'A report has sent',
+                'A report from '+request.user.username+' on photo '+meme.title+' by '+meme.uploader.username+' has sended'+meme.image.url, from_email='zcsw123@gmail.com', recipient_list=['jamie44566@gmail.com', request.user.email],
+            )
+            '''
             user = request.user.email
-            mail_subject ='Report successfully'
-            message = 'Report successfully'
+            mail_subject ='Report success'
+            message = 'Report success'
             to_email = 'jamie44566@gmail.com'
             email = EmailMessage(
-                mail_subject,message,settings.EMAIL_HOST_USER,[to_email]
+                'Report success',
+                'A report from'+request.user.username+'on photo'+meme.title+'by '+meme.uploader.username+' has sended','jamie44566@gmail.com',['jamie44566@gmail.com']
             )
             email.send()
+            '''
             return redirect('/memes/picture/'+pk)
-        else:
-            print(form.errors)
-            return render(request, template, {'form': form})
+    elif request.method == 'POST' and 'comment' in request.POST:
+        commentform = CommentForm(request.POST)
+        if commentform.is_valid():
+            commentform.save()
+            return redirect('/memes/picture/'+pk)
 
     return render(request, 'picture.html',{
         'meme' : meme, 
         'form' : form,
+        'commentform' : commentform,
+        'post_comments' : post_comments,
     })
 
 @csrf_exempt

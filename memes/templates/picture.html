@@ -52,7 +52,7 @@
 
                 <div class="submit" id="submit_btn">
                     <button data-close-button class="check_button" id="cancel_btn">取消</button>
-                    <button data-submit-button type="submit" class="check_button" id="report_btn">檢舉</button>
+                    <button data-submit-button type="submit" class="check_button" id="report_btn" name="report">檢舉</button>
                 </div>  
             </div>
             {{form.reporter.as_hidden}}
@@ -93,7 +93,10 @@
             <!-- 這是梗圖名字 由上傳者自己設定 -->
 
             <div class="space"></div>
-            
+            <div class="picture">
+                <img src="{{meme.image.url}}">
+                <button data-pop-target="#pop" id="report"><a href="#">覺得這個照片有問題？</a></button>
+            </div>
             <div class="text">
                 <h2>上傳者:{{meme.uploader}}</h2>
                 <h3 class="inform">圖片描述:{{meme.description}}</h3>
@@ -105,10 +108,10 @@
                 <div class="comments">
                     <form method="POST" action=>
                         {% csrf_token %}
-						{{form.user.as_hidden}}
-						{{form.post.as_hidden}}
-                        {{form.content}}
-                        <button type="submit">Comment</button>
+						{{commentform.user.as_hidden}}
+						{{commentform.post.as_hidden}}
+                        {{commentform.content}}
+                        <button type="submit" name="comment">Comment</button>
                     </form>
                     <p class="comment" id="first_comment">留言</p>
 					{% for comment in post_comments %}

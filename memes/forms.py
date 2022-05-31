@@ -1,5 +1,5 @@
 from django import forms
-from memes.models import Photo, Tag ,Report
+from memes.models import Photo, Tag, Comment, Report
 class NewTagForm(forms.ModelForm):
     class Meta:
         model = Tag
@@ -20,19 +20,12 @@ class UploadModelForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={
-        'placeholder' : 'Comment here...',
-    }))
-'''
-class CommentForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={
         'rows' : 4,
     }))
     
     class Meta:
         model = Comment
         fields = '__all__'
-        #fields = ('content',)]
-'''
 
 class ReportForm(forms.ModelForm):
     class Meta:
