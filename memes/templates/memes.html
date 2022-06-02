@@ -80,7 +80,7 @@
             {% for photo in photos %}
             <div class="meme">
                 <a href="{% url 'picture' photo.id %}" class="memetitle">
-                <img src="{{ photo.image.url }}"/>
+                <img class="memes_img" src="{{ photo.image.url }}"/>
                 </a>
                 <a class="meme_name" href="{% url 'picture' photo.id %}">{{ photo.title }}</a>
                 <a class="meme_like">30</a>

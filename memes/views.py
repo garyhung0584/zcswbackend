@@ -62,10 +62,10 @@ def picture(request, pk):
         form = ReportForm(request.POST)
         if form.is_valid():
             form.save()
-            send_mail(
-                'A report has sent',
-                'A report from '+request.user.username+' on photo '+meme.title+' by '+meme.uploader.username+' has sended'+meme.image.url, from_email='zcsw123@gmail.com', recipient_list=['jamie44566@gmail.com', request.user.email],
-            )
+            #send_mail(
+            #    'A report has sent',
+            #    'A report from '+request.user.username+' on photo '+meme.title+' by '+meme.uploader.username+' has sended'+meme.image.url, from_email='zcsw123@gmail.com', recipient_list=['jamie44566@gmail.com', request.user.email],
+            #)
             '''
             user = request.user.email
             mail_subject ='Report success'
