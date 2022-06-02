@@ -66,8 +66,10 @@ def picture(request, pk):
 
 def tag(request, pk):
     tag = Tag.objects.get(name = pk)
+    tags = Tag.objects.all()
     return render(request, 'tag.html',{
         'tag' : tag,
+        'tags' : tags,
     })
     
 

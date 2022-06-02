@@ -73,7 +73,7 @@ body{
 .inform{
     width: 430px;
     padding: 5px 0px 5px 5px;
-    margin: -7px 0px -3px 15px;
+    margin: -7px 0px 10px 15px;
     border-left: rgba(0, 0, 0, 0.5) 1px solid;
     word-break: break-all;
 }
@@ -81,9 +81,15 @@ body{
 .hashtag{
     display: flex;
     flex-wrap: wrap;
-    width: 450px;
     position: relative;
-    margin: 10px 0px 20px 15px;
+    margin: 20px 0px 20px 15px;
+}
+.hashtag a{
+    text-decoration: none;
+    color: #3366BB;
+}
+.hashtag a:visited{
+    color: #3366BB;
 }
 .hashtag span{
     display: inline-block;
@@ -122,6 +128,22 @@ body{
     border-left: rgba(0, 0, 0, 0.5) 1px solid;
 }
 
+.hashtag{
+    flex-wrap: wrap;
+    position: relative;
+    margin: 5px 0px 20px 10px;
+    overflow: auto;
+    display: inline-block;
+    padding: 2px 10px 2px 10px;
+    margin: 3px 1px 3px 1px;
+    color: #3366BB;
+    border: #666666 1px solid;
+    border-radius: 20px;
+    }
+.hashtag::before{
+    content: '# ';
+    color: transparent;
+    -webkit-text-stroke: 0.5px #3366BB;
 @media screen and ( max-width: 550px ) {
     .text{
         top: 150px;

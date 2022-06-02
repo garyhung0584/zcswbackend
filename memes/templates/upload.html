@@ -1,131 +1,162 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>上傳Upload</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'memes/css/upload.css' %}">
-    <link rel="stylesheet" href="{% static 'memes/css/pop.css' %}">
-    <script defer src="{% static 'memes/js/upload.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>上傳｜梗圖 Memes</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'memes/css/upload.css' %}">
+        <script defer src="{% static 'memes/js/upload.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!--menu-->
-    <div class="menu">
-        <p class="menu_left">
-            <a href="{% url 'main' %}">HOME</a>
-            <a href="{% url 'memes' %}">MEME</a>
-            <a href="{% url 'games' %}">GAME</a>
-        </p>
-        <p class="menu_right">
-            <a id="id">{{ user.get_username }}</a>
-        </p>
-        <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
-        <ul class="menu_dropdown">
-            <li><a href="{% url 'userinfo' request.user.id %}">個人資料</a></li>
-            <li><a href="#">blablabla</a></li>
-            <li><a href="{% url 'logout' %}?next={{request.path}}">登出</a></li>
-        </ul>
-    </div>
-    
-<!--
-    <div class="back">
-        <a href="#">梗圖上傳</a>
-    </div>
--->
+        <!--JQuery & bootsrtaps-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        
+        <!--Navbar-->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
+            <div class="container-fluid">
+                <a class="navbar-brand abs" href="{% url 'main' %}">威！真有梗ne！瑋！必須得吧！</a>
 
-    <main>
-        <div class="upload">
-            {% if form.errors %}
-                {% for field in form %}
-                    {% for error in field.errors %} 
-                    <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                    </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'memes' %}">梗圖</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'games' %}">遊戲</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto" style="cursor: pointer;">
+                        <li class="nav-item dropdown">
+                            <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a style="padding-right: 10px;">name</a>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="height: 40px; border-radius: 100%;">
+                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'upload' %}">上傳梗圖</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item">個人資料</a></li>
+                                <li><a class="dropdown-item">登出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        
+        <!-- <div class="back">
+            <a href="#">梗圖上傳</a>
+        </div> -->
+
+
+        <!--upload-->
+        <div class="container Container">
+            <div class="upload">
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %} 
+                        <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-            {% endif %}
-            <div class="upload_box">
-                {% block upload %}
-                <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="upload_pic" id="upload_pic">
-                        <label>
-                        上傳圖片 {{ form.image }}
-                        </label>
-                        {% comment %} <img id="preview_progressbarTW_img" src="#" /> {% endcomment %}
-                    </div>
-                    <div class="data">
-                        <div class="group">
-                            <label for="name" class="label">梗圖名字：</label>
-                            {% comment %} <input id="name" type="text" class="input"> {% endcomment %}
-                            {{ form.title }}
-                        </div>
-                        <div class="group">
-                            {{ form.uploader.as_hidden }}
-                            {% comment %} <input id="author" type="text" class="input" value="name" readonly="readonly"> {% endcomment %}
-                        </div>
-                        <div class="group">
-                            <label for="content" class="label">簡介：</label>
-                            {{ form.description }}
-                            {% comment %} <textarea id="content" row="3" class="content"></textarea> {% endcomment %}
-                        </div>
-
-                        <p class="add_hashtag_text">加入HashTag</p>
-                        <div id="hashtag_div" class="hashtag">
-                            {% for tag in form.fields.tags.queryset %}    
-                            <label for="checkbox-{{ tag }}">
-                                <input name="tags" id="checkbox-{{ tag }}" type="checkbox" value="{{ tag.id }}">
-                                <span>{{ tag }}</span>
+                {% endif %}
+                <div class="upload_box">
+                    {% block upload %}
+                    <form action="{% url 'upload' %}" class="row justify-content-center" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="upload_pic col-lg-6 col-md-12 align-self-start" id="upload_pic">
+                            <div class="pic" id="pic">
+                            <label>
+                            上傳圖片 {{ form.image }}
                             </label>
-                            {% endfor %}
+                            </div>
                         </div>
-                        {% comment %} <script>
-                            $(document).ready(function(){
-                                $("hey").click(function(){
-                                    console.log($(this))
-                                    if($(this).children('input').prop("checked")){
-                                        $(this).children('input').addClass("hashtag_checked");
-                                    }
-                                    else{
-                                        $(this).children('input').removeClass("hashtag_checked");
-                                    }
-                                })
-                            })
-                        </script> {% endcomment %}
 
-                        <p class="new_hashtag_text">
-                            新增HashTag
-                            <input class="new_hashtag hashtag_value" id="new_hashtag" type="text" onkeypress="return event.keyCode!=13">
-                            <button id="new_hashtag_button">確認</button>
-                        </p>
-                        
-                        <div class="submit">
-                            <input id="submit_button" type="submit" value="繳交">
-                        </div>
-                    </div>
-                </form>
-                {% endblock %}
-            
+                        <div class="data col-lg-6 col-md-8">
+                            <div class="group">
+                                <label for="name" class="label">梗圖名字：</label>
+                                {{ form.title }}
+                            </div>
+                            <div class="group">
+                                {{ form.uploader.as_hidden }}
+                            </div>
+                            <div class="group">
+                                <label for="content" class="label">簡介：</label>
+                                {{ form.description }}
+                            </div>
+
+                            <p class="add_hashtag_text">加入HashTag</p>
+                            <div id="hashtag_div" class="hashtag">
+                                {% for tag in form.fields.tags.queryset %}    
+                                <label for="checkbox-{{ tag }}">
+                                    <input name="tags" id="checkbox-{{ tag }}" type="checkbox" value="{{ tag.id }}">
+                                    <span>{{ tag }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                    
+                            <p class="new_hashtag_text">
+                                新增HashTag
+                                <br>
+                                <input class="new_hashtag hashtag_value" id="new_hashtag" type="text" onkeypress="return event.keyCode!=13">
+                                <button class="new_hashtag_field" id="new_hashtag_button">+</button>
+                            </p>
+
+                            <div class="submit">
+                                <input id="submit_button" type="submit" value="繳交">
+                            </div>
+                        </div>    
+                    </form>
+                    {% endblock %}
+                </div>
             </div>
         </div>
-    </main>
-    <script type="text/javascript">
-        const tagUrl = `{% url 'newTag' %}`;
-        var x=new FileReader;
-        document.forms[0].elements[1].onchange=function(){
-        x.readAsDataURL(this.files[0]);
-        }
-        x.onloadend=function(){
-        var elem = document.createElement("img");
-        elem.setAttribute("src", this.result);
-        elem.setAttribute("id", "subImg");
-        if (document.contains(document.getElementById("subImg"))) {
-            document.getElementById("subImg").remove();
-        }
-        document.getElementById("upload_pic").appendChild(elem);
-        }
-    </script>
-</body>
+
+        <!--footer-->
+        <footer>
+            <div class="Footer">
+                <p>
+                    大家好，我們是「威！真有梗ne！瑋！必須得吧！」小組！</br>
+                    這是我們的職場實務專題！有任何問題都可以去問林宏信：▽</br>
+                </p>
+                <p class="footer-footer">
+                    <a href="{% url 'main' %}">首頁</a>｜
+                    <a href="{% url 'memes' %}">梗圖</a>｜
+                    <a href="{% url 'games' %}">遊戲</a>｜
+                    <a href="#">聯絡我們</a>
+                </p>
+            </div>
+        </footer>
+        <script type="text/javascript">
+            const tagUrl = `{% url 'newTag' %}`;
+            var x=new FileReader;
+            document.forms[0].elements[1].onchange=function(){
+            x.readAsDataURL(this.files[0]);
+            }
+            x.onloadend=function(){
+            var elem = document.createElement("img");
+            elem.setAttribute("src", this.result);
+            elem.setAttribute("id", "subImg");
+            if (document.contains(document.getElementById("subImg"))) {
+                document.getElementById("subImg").remove();
+            }
+            document.getElementById("pic").appendChild(elem);
+            }
+            $(function(){
+                $("#upload_pic").on('click', function(){
+                    var img_h = $(".pic img").height;
+                    if( img_h > 350 ){
+                        $(".pic").css("height", ( img_h+50 ) +"px");
+                    }
+                })
+            });
+        </script>
+    </body>
 </html>
+

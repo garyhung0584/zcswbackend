@@ -1,75 +1,133 @@
 <!DOCTYPE html>
-
-{% load unicorn %}
-{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>梗圖｜name｜詳細資料</title>
-    <link rel="stylesheet" href="{% static 'memes/css/picture.css' %}">
-    <link rel="stylesheet" href="{% static 'memes/css/navbar.css' %}">
-    {% unicorn_scripts %}
-</head>
-<body>
-    <!-- Navbar -->
-    <div class="menu">
-        <p class="menu_left">
-            <a href="{% url 'main' %}">HOME</a>
-            <a href="{% url 'memes' %}">MEME</a>
-            <a href="{% url 'games' %}">GAME</a>
-        </p>
-        <p class="menu_right">
-            {% if not user.is_authenticated %}
-            <a href="{% url 'login'%}?next={% url 'main' %}" id="id">Login</a>
-            {% else %}
-            <a id="id">{{ user.get_username }}</a>
-        </p>
-        <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
-        <ul class="menu_dropdown">
-            <li><a href="{% url 'userinfo' request.user.id %}">個人資料</a></li>
-            <li><a href="#">blablabla</a></li>
-            <li><a href="{% url 'logout' %}?next={{request.path}}">登出</a></li>
-        </ul>
-		{% endif %}
-    </div>
-    
+    <head>
+        {% load unicorn %}
+        {% load static %}
+        <meta charset="UTF-8">
+        <title>name｜梗圖 Memes</title>
+        <link rel="stylesheet" href="{% static 'memes/css/picture.css' %}">
+        {% unicorn_scripts %}
 
-    <div class="content">    
-        <div class="content_box">
+        <!--JQuery & bootsrtaps-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    </head>
+    <body>
 
-            <div class="title">
-                {{meme.title}}
-                {% if request.user == meme.uploader %}
-                <a href="">[編輯]</a>
-                {% endif %}
+        <!--Navbar-->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
+            <div class="container-fluid">
+                <a class="navbar-brand abs" href="{% url 'main' %}">威！真有梗ne！瑋！必須得吧！</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'memes' %}">梗圖</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'games' %}">遊戲</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto" style="cursor: pointer;">
+                        <li class="nav-item dropdown">
+                            <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a style="padding-right: 10px;">name</a>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="height: 40px; border-radius: 100%;">
+                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'upload' %}">上傳梗圖</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item">個人資料</a></li>
+                                <li><a class="dropdown-item">登出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <!-- 這是梗圖名字 由上傳者自己設定 -->
+        </nav>
+        
 
-            <div class="picture">
-                <img src="{{meme.image.url}}">
-                <p>覺得這個圖片有問題？</p>
-                {% comment %} <a href="{% url 'report' meme.id %}">覺得這個圖片有問題？</a> {% endcomment %}
-            </div>
+        <div class="container Container">    
+            <div class="row justify-content-center">
 
-            <div class="space"></div>
-            
-            <div class="text">
-                <h2>上傳者:{{meme.uploader}}</h2>
-                <h3 class="inform">圖片描述:{{meme.description}}</h3>
-				{% for tag in meme.tags.all %}
-                    <p class="hashtag"><a href="/memes/tag/{{ tag }}">{{tag}}</a></p>
-				{% endfor %}
-                {% comment %} <p class="hashtag">{{meme.tags.name}}</p> {% endcomment %}
-                <p class="subtitle">留言</p>
-                <div class="comments">
-                    {% csrf_token %}
-                    {% unicorn 'comments' %}
+                <div class="title col-11">
+                    {{meme.title}}
+                    {% if request.user == meme.uploader %}
+                    <a href="">[編輯]</a>
+                    {% endif %}
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" id="like">
+                    <label for="like" id="likes">
+                        <img id="like_img" src="{% static 'memes/img/heart1.png' %}"></img>
+                        <p>20</p>
+                    </label>
+                </div>
+
+                <div class="picture col-lg-6 col-md-12">
+                    <img src="{{meme.image.url}}">
+                    <a href="">覺得這個圖片有問題？</a>
+                </div>
+                
+                <div class="text col-lg-6 col-md-8">
+                    <p class="subtitle">上傳者:{{meme.uploader}}</p>
+                    <p class="subtitle">圖片描述:</p>
+                    <div class="inform">
+                        {{meme.description}}
+                    </div>
+
+                    <p class="hashtag">
+                        {% for tag in meme.tags.all %}
+                            <span>
+                            <a href="/memes/tag/{{ tag }}">{{ tag }}</a>
+                            </span>
+                        {% endfor %}
+                    </p>
+
+                    <p class="subtitle">留言</p>
+                    <div class="comments">
+                        {% csrf_token %}
+                        {% unicorn 'comments' %}
+                    </div>
                 </div>
             
             </div>
-        
-        </div>
-    </div>    
-</body>
+        </div>    
+
+        <!--footer-->
+        <footer>
+            <div class="Footer">
+                <p>
+                    大家好，我們是「威！真有梗ne！瑋！必須得吧！」小組！</br>
+                    這是我們的職場實務專題！有任何問題都可以去問林宏信：▽</br>
+                </p>
+                <p class="footer-footer">
+                    <a href="{% url 'main' %}">首頁</a>｜
+                    <a href="{% url 'memes' %}">梗圖</a>｜
+                    <a href="{% url 'games' %}">遊戲</a>｜
+                    <a href="#">聯絡我們</a>
+                </p>
+            </div>
+        </footer>
+        <script>
+            window.onresize = function(){
+                document.documentElement.style.setProperty('--footerTop', window.innerHeight+'px');
+            }
+
+            var like = false;
+            $("#like").click( function() {
+                if( $("#like").prop('checked') ){
+                    $("#like_img").attr( "src", "{% static 'memes/img/heart2.png' %}" );
+                    like = true;
+                }
+                else{
+                    $("#like_img").attr( "src", "{% static 'memes/img/heart1.png' %}" );
+                    like = false;
+                }
+            })
+        </script>
+    </body>
 </html>
 
