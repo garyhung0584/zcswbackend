@@ -65,7 +65,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # user.is_active = False
+            user.is_active = False
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activation link has been sent to your email id'
@@ -79,7 +79,65 @@ def register(request):
             email = EmailMessage(
                 mail_subject,message,to=[to_email]
             )
-            # email.send()
+            email.send()
+            return HttpResponseRedirect('registered')
+            #return HttpResponse('Please confirm your email address to complete the registration')
+
+def userinfo(request):
+    if request.user.is_authenticated:
+        return render(request, 'personal_info.html')
+    else:
+        return HttpResponseRedirect('/accounts/login/')
+'''
+def useredit(request):
+    if request.user.is_authenticated:
+        form = UserEditForm()
+        if request.method == 'POST':
+            form = UserEditForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/main/userinfo/')
+        return render(request, 'useredit.html',{
+            'form' : form
+        })
+    else:
+        return HttpResponseRedirect('/accounts/login/')
+'''
+'''
+def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/main/')
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username = username, password = password)
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/main/')
+    else:
+            return render(request, 'login.html')
+            return render(request, 'login.html')
+'''
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            mail_subject = 'Activation link has been sent to your email id'
+            message = render_to_string('acc_activate_email.html',{
+                'user' : user,
+                'domain' : current_site.domain,
+                'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+                'token' : account_activation_token.make_token(user)
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject,message,to=[to_email]
+            )
+            email.send()
             return HttpResponseRedirect('registered')
             #return HttpResponse('Please confirm your email address to complete the registration')
     else:
@@ -94,7 +152,6 @@ def registered(request):
 
 '''
             auth.login(request,user)
-            
             messages.success(request, "Registration successful.")
             return HttpResponseRedirect('/main')
         else:
@@ -129,7 +186,19 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         auth.login(request, user)
-        #return HttpResponseRedirect('useredit')
+        return HttpResponseRedirect('userinfo')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def useredit(request):
+    member = request.user.member
+    form = UserEditForm(instance=member)
+
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=member)
+        if form.is_valid():
+            form.save()
+    
+    context = {'form':form}
+    return render(request, 'useredit.html', context)

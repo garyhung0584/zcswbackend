@@ -2,20 +2,29 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>LoginPage</title>
+        <title>註冊 SignUpPage</title>
         {% load static %}
         <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+
+         <!--JQuery & bootsrtaps-->
+         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script> 
     </head>
     <body>
-        <nav class="menu">
-            <p class="menu_left">
-                <a href="{% url 'main'%}">HOME</a>
-                <a href="{% url 'games'%}">GAME</a>
-                <a href="{% url 'memes'%}">MEME</a>
-            </p>
+        <!--Navbar-->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
+            <div class="container-fluid">
+                <a class="navbar-brand abs" href="{% url 'main'%}">威！真有梗ne！瑋！必須得吧！</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
         </nav>
 
-        <main>
+        <!--登錄-->
             <div class="LogIn_box">    
                 <div class="LogIn">
                     {% if user.is_authenticated %}
@@ -33,6 +42,6 @@
 					
 				</div>
             </div>
-        </main>
     </body>
 </html>
+

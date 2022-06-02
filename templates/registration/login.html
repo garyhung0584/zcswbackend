@@ -2,63 +2,81 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>LoginPage</title>
-        {% load static %}
+        <title>登錄 LoginPage</title>
+		{% load static %}
         <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+
+         <!--JQuery & bootsrtaps-->
+         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script> 
     </head>
     <body>
-        <nav class="menu">
-            <p class="menu_left">
-                <a href="{% url 'main'%}">HOME</a>
-                <a href="{% url 'memes'%}">MEME</a>
-                <a href="{% url 'games'%}">GAME</a>
-            </p>
-        </nav>
-        <main>
-            <div class="LogIn_box">
-                <div class="LogIn">
-                    {% if user.is_authenticated %}
-                    <div>
-                        <span class="message">Hello there, {{ user.get_username }}<br><p class="message2">Trying to
-                        <a href="{% url 'logout'%}?next={{request.path}}">Logout?</a></p></span>
-                    </div>
-                    {% else %}
-                    <input id="tab-1" type="radio" name="tab" class="SignIn" checked><label for="tab-1" class="tab">登入</label>
-                    <input id="tab-2" type="radio" name="tab" class="SignUp"><label for="tab-2" class="tab"></label>
+        <!--Navbar-->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
+            <div class="container-fluid">
+                <a class="navbar-brand abs" href="{% url 'main'%}">威！真有梗ne！瑋！必須得吧！</a>
 
-                    <div class="LogIn_form">
-                        <div class="SignIn_form">
-                            <form action="" method="post">
-                            {% csrf_token %}
-                                <div class="group">
-                                    <label for="account" class="label">帳號</label>
-                                    <input id="username" type="text" name = "username" class="input" placeholder="電子信箱/用戶名稱">
-                                </div>
-                                <div class="group">
-                                    <label for="password" class="label">密碼</label>
-                                    <input id="password" type="password" name = "password" class="input" data-type="password">
-                                </div>
-                                <div class="group">
-                                    <input id="check" type="checkbox" class="check">
-                                    <label for="check"><span class="icon"></span> 保持登入</label>
-                                </div>
-                                <div class="group">
-                                    <input type="submit" class="button" value="登入">
-                                </div>
-								{% if form.errors %}
-								<p style="color: red">Invalid Information</p>
-								{% endif %}
-                                <div class="hr"></div>
-                                <div class="below">
-                                    <a href="{% url 'register' %}">創建帳號</a>
-                                    <a href="{% url 'password_reset' %}">忘記密碼？</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'memes'%}">梗圖</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'games'%}">遊戲</a></li>
+                    </ul>
                 </div>
             </div>
-        </main>
-		{% endif %}
+        </nav>
+
+        <!--登錄-->
+        <div class="LogIn_box">    
+            <div class="LogIn">
+				{% if user.is_authenticated %}
+				<div>
+					<span class="message">Hello there, {{ user.get_username }}<br><p class="message2">Trying to
+					<a href="{% url 'logout'%}?next={{request.path}}">Logout?</a></p></span>
+				</div>
+				{% else %}
+                <!--登入or註冊-->
+                <input id="tab-1" type="radio" name="tab" class="SignIn" checked><label for="tab-1" class="tab">登入</label>
+                <input id="tab-2" type="radio" name="tab" class="SignUp"><label for="tab-2" class="tab"></label>
+
+                <div class="LogIn_form">
+                    <!--登入-->
+					<div class="SignIn_form">
+						<form action="" method="post">
+						{% csrf_token %}
+							<div class="group">
+								<label for="account" class="label">帳號</label>
+								<input id="username" type="text" name = "username" class="input" placeholder="電子信箱/用戶名稱">
+							</div>
+							<div class="group">
+								<label for="password" class="label">密碼</label>
+								<input id="password" type="password" name = "password" class="input" data-type="password">
+							</div>
+							<div class="group">
+								<input id="check" type="checkbox" class="check">
+								<label for="check"><span class="icon"></span> 保持登入</label>
+							</div>
+							<div class="group">
+								<input type="submit" class="button" value="登入">
+							</div>
+							{% if form.errors %}
+							<p style="color: red">Invalid Information</p>
+							{% endif %}
+							<div class="hr"></div>
+							<div class="below">
+								<a href="{% url 'register' %}">創建帳號</a>
+								<a href="{% url 'password_reset' %}">忘記密碼？</a>
+							</div>
+						</form>
+					</div>
+                </div>
+				{% endif %}
+            </div>
+        </div>
     </body>
 </html>

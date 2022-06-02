@@ -1,136 +1,19 @@
 /* https://codepen.io/khadkamhn/pen/ZGvPLo?editors=1100 */
 
 body{
-	background: #282a35;
-	/* font: 600 16px/18px 'Open Sans',sans-serif; */
+	background: #343a40 !important;
+	font: 600 16px/18px 'Open Sans',sans-serif;
 }
 
-/* scrollbar */
-main{
-    position: absolute;
-    top: 5px;
-    width: 99vw;
-    margin: 0;
-    bottom: 0;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-}
-
-
-/* menu */
-@keyframes click_button_1{
-    from {background-color: #dddddd;}
-    to {background-color: #ebebeb;}
-}
-@keyframes click_button_2{
-    from {background-color: #dddddd;}
-    to {background-color: #F5F5F5;}
-}
-
-.menu{
-    position: fixed;
-    width: 100%;
-    height: 52px;
-    top: 0px;
-    left: 0px;
-    z-index: 999;
-
-    background-color: #282a35;
-}
-
-.menu a{
-    display: inline;
-    padding: 17px 20px;
-    height: 52px;
-    text-decoration: none;
-}
-
-.menu_left{
-    position: fixed;
-    float: left;
-    left: 25px;
-    cursor: pointer;
-    
-    text-align: center;
-}
-.menu_left a{
-    font: small-caps bold 17px sans-serif;
-    color: #ffffff;
-}
-.menu_left a:hover {
-    background-color: #ebebeb;
-    color: #000000;
-    transition-duration: 0.1s;
-}
-.menu_left a:active{
-    animation-name: click_button_1;
-    animation-duration: 1s;
-}
-
-.menu_right{
-    position: fixed;
-    float: right;
-    top: 3px;
-    right: 70px;
-
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    color: #ffffff;
-}
-.menu img{
-    position: fixed;
-    top: 13px;
-    right: 40px;
-    width: 27px;
-    cursor: pointer;
-}
-
-.menu_dropdown{
-    position: fixed;
-    top: 36px;
-    right: 5px;
-
-    list-style-type: none;
-}
-.menu_dropdown a{
-    display: none;
-    width: 120px;
-    height: 25px;
-
-    font: small-caps, Arial, Helvetica bold 17px sans-serif;
-    color: #ffffff;
-    background-color: #3B3E4F;
-
-    text-decoration: none;
-    text-align: center;
-    vertical-align: middle;
-}
-.menu_dropdown a:hover {
-    display: inline-block;
-    background-color: #F5F5F5;
-    color: #000000;
-    transition-duration: 0.1s;
-}
-.menu_dropdown a:active{
-    animation-name: click_button_2;
-    animation-duration: 1s;
-}
-
+/* navbar */
 #profile_pic{
-    position: fixed;
-    top: 0px;
-    right: 30px;
-    width: 47px;
-    height: 54px;
-    background-color: rgba(0,0,0,0);
-    cursor: pointer;
-
+	height: 40px; 
+	border-radius: 100%;
 }
-#profile_pic:hover + ul>li>a{
-    display: inline-block;
-}
-.menu_dropdown:hover >li>a:not(:hover){
-    display: inline-block;
+@media screen and (max-width: 991px){
+	#profile_pic{
+		display: none;
+	}
 }
 
 
@@ -145,7 +28,7 @@ main{
 }
 a{
 	color: inherit;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 @keyframes fadein{
@@ -154,12 +37,12 @@ a{
 }
 .LogIn_box{
 	position: absolute;
-	top: 3px;
+	top: 10px;
 	left: 50%;
-	margin-left: -275px;
+	margin-left: -325px;
 	width: 100%;
-	max-width: 500px;
-	min-height: 550px;
+	max-width: 650px;
+	min-height: 800px;
 	box-shadow: 0 12px 15px 0 rgba(0,0,0,0.5), 0 20px 25px 0 rgba(0,0,0,0.3);
 	user-select: none;
 
@@ -171,15 +54,6 @@ a{
 	position: absolute;
 	padding: 90px 55px 50px 55px;
 	background-color: #f0f0f0;
-}
-.message{
-	font-size: 28px;
-	position: absolute;
-	top: 250px;
-}
-
-.message2{
-	font-size: 18px;
 }
 .SignIn_form, .SignUp_form{
 	top: 0;
@@ -198,7 +72,7 @@ a{
 }
 
 .tab{
-	font-size: 22px;
+	font: 600 22px 'Open Sans', sans-serif;
 	margin-right: 15px;
 	padding-bottom: 5px;
 	margin: 0 15px 30px 0;
@@ -225,7 +99,7 @@ a{
 	margin-bottom: 15px;
 }
 
-.LogIn_form .group input,
+.LogIn_form .group .input,
 .LogIn_form .group .button{
 	display: block;
 	border: none;
@@ -254,8 +128,8 @@ a{
 	animation-name: click_button_3;
 	animation-duration: 1s;
 }
-.LogIn_form .group input{
-	width: 92%;
+.LogIn_form .group .input{
+	width: 99%;
 	color: #000000;
 }
 .LogIn_form .group ::placeholder{
@@ -266,9 +140,9 @@ a{
 	-webkit-text-security: circle;
 }
 
-.LogIn_form .group .label{
+.LogIn_form .group label{
 	color: #000000;
-	font-size: 14px;
+	font: 600 14px 'Open Sans', sans-serif;
 }
 
 .LogIn_form .group label .icon{
@@ -334,12 +208,11 @@ a{
 }
 .below a{
 	cursor: pointer;
+	color: #000000;
+	font: 600 16px 'Open Sans',sans-serif;
+	text-decoration: none;
 }
-
-
-.EMAIL_confirm{
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	align-items: center;
+.below a:hover{
+	color: #000000;
+	text-decoration: none;
 }

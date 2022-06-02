@@ -66,36 +66,36 @@
                         <button data-close-button class="close-button">&times;</button>
                     </div>
                     <div class="pop-body">
-                            <div id="photo_box"	>
-                                <div id="photo_div" class="photo_div"><div id="photo"><img src="{{user.member.profile_pic.url}}" alt=""></div></div>
-                                <div class="upload_pic">
-                                    <label>
-                                    {{form.profile_pic}}
-                                    <!-- <input id="id_profile_pic" type="file" name="profile_pic" accept="image/*" onchange="display_image(event)"> -->
-                                    上傳相片
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="info">
-                                <div class="group">
-                                    <label for="account_name" class="label">帳號/名稱：<span id="account_name" class="account_name_class">{{form.username}}</span></label>
-                                    
-                                    <label for="email" class="label">電子信箱：<span id="email" class="email_class"></span></label>
-                                    
-                                    <form class="intro">
-                                        <label for="content" class="label">簡介：</label>
-                                        {{form.intro}}
-                                        <!-- <textarea id="content" row="3" class="content"></textarea> --> 
-                                    </form>
-                                    <div class="submit" id="submit_btn">
-                                        <button data-submit-button type="submit" class="check_button" id="report_btn">確認</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-            {% endif %}
+						<div id="photo_box"	>
+							<div id="photo_div" class="photo_div"><div id="photo"><img src="{{user.member.profile_pic.url}}" alt=""></div></div>
+							<div class="upload_pic">
+								<label>
+								{{form.profile_pic}}
+								<!-- <input id="id_profile_pic" type="file" name="profile_pic" accept="image/*" onchange="display_image(event)"> -->
+								上傳相片
+								</label>
+							</div>
+						</div>
+						<div id="info">
+							<div class="group">
+								<label for="account_name" class="label">帳號/名稱：<span id="account_name" class="account_name_class">{{form.username}}</span></label>
+								
+								<label for="email" class="label">電子信箱：<span id="email" class="email_class"></span></label>
+								
+								<div class="intro">
+									<label for="content" class="label">簡介：</label>
+									{{form.intro}}
+									<!-- <textarea id="content" row="3" class="content"></textarea> --> 
+								</div>
+								<div class="submit" id="submit_btn">
+									<button data-submit-button type="submit" class="check_button" id="report_btn">確認</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
             </div>
+            {% endif %}
             <div class="pop_image" id="pop_image">
 
             </div>
