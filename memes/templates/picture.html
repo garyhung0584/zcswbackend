@@ -87,7 +87,6 @@
 							{% else %}
                             <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<a style="padding-right: 10px;">{{ user.get_username }}</a>
-                                <img src="{{request.user.member.profile_pic.url}}" style="height: 40px; border-radius: 100%;">
                             </div>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{% url 'upload'%}">上傳梗圖</a></li>
@@ -116,9 +115,13 @@
                     <input type="checkbox" id="like">
                     <label for="like" id="likes">
 						<a href="{% url 'like' meme.id %}">
+						{% if request.user in meme.liker_tuple %}
+                        <img id="like_img" src="{% static 'memes/img/heart2.png' %}"></img>
+						{% else %}
                         <img id="like_img" src="{% static 'memes/img/heart1.png' %}"></img>
+						{% endif %}
 						</a>
-                        <p>{{like_count}}</p>
+                        <p>{{meme.like_count}}</p>
                     </label>
                 </div>
 

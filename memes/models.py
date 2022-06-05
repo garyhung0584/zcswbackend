@@ -23,6 +23,9 @@ class Photo(models.Model):
     tags = models.ManyToManyField(Tag, blank = True, related_name='photos')
     likes = models.ManyToManyField(User, related_name='likes')
     
+    def liker_tuple(self):
+        return self.likes.all()
+
     def like_count(self):
         return self.likes.count()
 

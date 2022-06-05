@@ -23,7 +23,6 @@
 				{% else %}
 				<a id="id">{{ request.user.get_username }}</a>
             </p>
-            <div id="profile_pic"><img src="{{request.user.member.profile_pic.url}}"></div>
             <ul class="menu_dropdown">
                 <li><a href="{% url 'userinfo' request.user.id %}">個人資料</a></li>
                 <li><a href="#">blablabla</a></li>
@@ -34,9 +33,6 @@
         <!-- Navbar -->
 
         <main class="container">
-            <div id="person_photo_div">
-                <img id="person_photo" src="{{user.member.profile_pic.url}}" alt="個人照片">
-            </div>
             <div id="bio">
                 <p id="name">{{ user.member.username }}</p>
                 <p id="gmail">{{user.email}}</p>
@@ -67,10 +63,8 @@
                     </div>
                     <div class="pop-body">
 						<div id="photo_box"	>
-							<div id="photo_div" class="photo_div"><div id="photo"><img src="{{user.member.profile_pic.url}}" alt=""></div></div>
 							<div class="upload_pic">
 								<label>
-								{{form.profile_pic}}
 								<!-- <input id="id_profile_pic" type="file" name="profile_pic" accept="image/*" onchange="display_image(event)"> -->
 								上傳相片
 								</label>

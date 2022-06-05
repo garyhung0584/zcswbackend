@@ -23,12 +23,13 @@ class UserEditForm(forms.ModelForm):
     
     class Meta:
         model = Member
-        fields = ('profile_pic','username','intro')
+        fields = ('username','intro')
         #exclude = ['user', 'imguploaded', 'likes']
         
-        
+    '''
     def __init__(self, *args, **kwargs):
         super(UserEditForm, self).__init__(*args, **kwargs)
         self.fields['profile_pic'].widget.attrs.update({
             'onchange' : 'display_image(event)'
         })
+    '''
