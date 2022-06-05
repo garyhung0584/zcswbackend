@@ -65,7 +65,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            #user.is_active = False
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activation link has been sent to your email id'
@@ -79,15 +79,16 @@ def register(request):
             email = EmailMessage(
                 mail_subject,message,to=[to_email]
             )
-            email.send()
+            #email.send()
             return HttpResponseRedirect('registered')
             #return HttpResponse('Please confirm your email address to complete the registration')
-
+'''
 def userinfo(request):
     if request.user.is_authenticated:
         return render(request, 'personal_info.html')
     else:
         return HttpResponseRedirect('/accounts/login/')
+'''
 '''
 def useredit(request):
     if request.user.is_authenticated:
