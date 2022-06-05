@@ -115,8 +115,10 @@
                 <div class="col-1">
                     <input type="checkbox" id="like">
                     <label for="like" id="likes">
+						<a href="{% url 'like' meme.id %}">
                         <img id="like_img" src="{% static 'memes/img/heart1.png' %}"></img>
-                        <p>20</p>
+						</a>
+                        <p>{{like_count}}</p>
                     </label>
                 </div>
 

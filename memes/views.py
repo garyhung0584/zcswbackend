@@ -5,7 +5,7 @@ from email import message
 from email.message import EmailMessage
 from re import template
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.files.storage import FileSystemStorage
@@ -48,6 +48,7 @@ def picture(request, pk):
     meme = Photo.objects.get(id = pk)
     template = 'picture.html'
     post_comments = Comment.objects.all().filter(post=Photo.objects.get(id = pk))
+    like_count = meme.likes.count()
     form = ReportForm(initial={'reporter':request.user,'post': meme})
     commentform = CommentForm(initial={'user':request.user,'post': meme})
     if request.method == "GET":
@@ -55,6 +56,7 @@ def picture(request, pk):
             'meme' : meme,
             'form' : form,
             'commentform' : commentform,
+            'like_count' : like_count,
             'post_comments' : post_comments,
         })
 
@@ -88,8 +90,18 @@ def picture(request, pk):
         'meme' : meme, 
         'form' : form,
         'commentform' : commentform,
+        'like_count' : like_count,
         'post_comments' : post_comments,
     })
+
+@login_required(login_url='login')
+def like(request, pk):
+    meme = Photo.objects.get(id = pk)
+    if meme.likes.filter(id=request.user.id).exists():
+        meme.likes.remove(request.user)
+    else:
+        meme.likes.add(request.user)
+    return redirect('/memes/picture/'+pk)
 
 @csrf_exempt
 def newTag(request):
@@ -111,7 +123,7 @@ def newTag(request):
             res.status_code = 400
             return res
 
-
+'''
 @login_required(login_url='login')
 def report(request, pk):
     meme = Photo.objects.get(id = pk)
@@ -136,7 +148,7 @@ def report(request, pk):
         'post_comments' : post_comments,
         #'post_comments_count' : post_comments_count,
     })
-
+'''
 def tag(request, pk):
     tag = Tag.objects.get(name = pk)
     tags = Tag.objects.all()
@@ -145,7 +157,7 @@ def tag(request, pk):
         'tags' : tags,
     })
     
-
+'''
 @login_required(login_url='login')
 def report(request, pk):
     meme = Photo.objects.get(id = pk)
@@ -159,6 +171,7 @@ def delete_picture(request, pk):
         pic = Photo.objects.get(pk)
         pic.delete()
         return HttpResponseRedirect('memes')
+'''
 
 @csrf_exempt
 def filter(request):

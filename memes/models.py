@@ -11,6 +11,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Photo(models.Model):
     title = models.CharField(max_length=16, null = True)
     # uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null = True)
@@ -19,11 +20,19 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='memes/', blank = False, null = True)
     upload_date = models.DateTimeField(auto_now_add = True, null = True)
     description = models.TextField(blank = True, max_length = 256, null = True)
-    tags = models.ManyToManyField(Tag, blank = True, related_name="photos")
+    tags = models.ManyToManyField(Tag, blank = True, related_name='photos')
+    likes = models.ManyToManyField(User, related_name='likes')
+    
+    def like_count(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title
 
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    post = models.ForeignKey(Photo, related_name="like", on_delete=models.CASCADE, null = True)
+    like = models.BooleanField(default= False)
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)

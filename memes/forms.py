@@ -1,5 +1,5 @@
 from django import forms
-from memes.models import Photo, Tag, Comment, Report
+from memes.models import Photo, Tag, Like, Comment, Report
 class NewTagForm(forms.ModelForm):
     class Meta:
         model = Tag
@@ -31,3 +31,8 @@ class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ("__all__")
+
+class LikeForm(forms.ModelForm):
+    class Meta:
+        model = Like
+        fields = '__all__'

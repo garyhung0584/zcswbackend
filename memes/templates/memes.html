@@ -83,7 +83,7 @@
                 <img class="memes_img" src="{{ photo.image.url }}"/>
                 </a>
                 <a class="meme_name" href="{% url 'picture' photo.id %}">{{ photo.title }}</a>
-                <a class="meme_like">30</a>
+                <a class="meme_like" href="{% url 'like' photo.id %}">{{photo.like_count}}</a>
             </div>
             {% endfor %}
         </div>
