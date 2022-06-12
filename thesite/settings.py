@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #'django_filters',
     #'main',
     'games',
+    'game',
     'taggit',
     'rest_framework',
     'django_filters',
