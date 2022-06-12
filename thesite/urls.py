@@ -30,6 +30,7 @@ urlpatterns = [
     path('games/', include('games.urls')),
     path('memes/', include('memes.urls')),
     path('unicorn/', include('django_unicorn.urls')),
+    path('game/', include('game.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
